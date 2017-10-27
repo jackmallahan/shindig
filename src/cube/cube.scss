@@ -1,0 +1,132 @@
+/* cube container */
+.outer-cube-container {
+  position: fixed;
+  width: 100%;
+  height: 250px;
+  top: 100px;
+  z-index: 100;
+  animation-name: drop-in;
+  animation-duration: 3s;
+}
+
+.inner-cube-container {
+  margin: auto;
+  width: 300px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
+.pole {
+  width: 28px;
+  height: 400px;
+  background-image: url(./assets/pole.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  position: absolute;
+  top: -307px;
+}
+
+/* The Cube */
+.cube-wrap {
+	perspective: 800px;
+	perspective-origin: 50% 100px;
+}
+
+.cube {
+	position: relative;
+	width: 200px;
+	transform-style: preserve-3d;
+  animation: spin 30s infinite linear;
+  animation-delay: 3s;
+  transform: translate3d(0, 0, 0);
+}
+
+.cube-face {
+	position: absolute;
+  width: 200px;
+  height: 200px;
+  background: black;
+}
+
+.cube-background  {
+  width: 100%;
+  height: 100%;
+  background: black;
+  position: absolute;
+  z-index: -1;
+  border:3px solid $neonBlue;
+  border-style: inset;
+  transform: translate3d(0, 0, 0);
+}
+
+.border-flicker1  {
+  animation: border-flicker1 2s linear infinite;
+}
+
+.border-flicker2  {
+  animation: border-flicker2 1s linear infinite;
+}
+
+.back {
+	transform: translateZ(-100px) rotateY(180deg);
+}
+.right {
+	transform: rotateY(-270deg) translateX(100px);
+	transform-origin: top right;
+}
+.left {
+	transform: rotateY(270deg) translateX(-100px);
+	transform-origin: center left;
+}
+.top {
+	transform: rotateX(-90deg) translateY(-100px);
+	transform-origin: top center;
+}
+.bottom {
+	transform: rotateX(90deg) translateY(100px);
+	transform-origin: bottom center;
+}
+.front {
+	transform: translateZ(100px);
+}
+
+.the {
+  color: $neonRed;
+  font-family: 'shindig';
+  font-size: 30px;
+  position: absolute;
+  top: 51px;
+  left: 71px;
+  transform: rotate(-31deg);
+  background: none;
+}
+
+.flicker3 {
+  animation: flicker3 7s linear infinite;
+}
+
+.flicker4 {
+  animation: flicker2 4s linear infinite;
+}
+
+h1 {
+  color: $neonRed;
+  font-family: 'shindig';
+  font-size: 60px;
+  transform: rotate(-31deg);
+  background: none;
+  position: absolute;
+  top: 56px;
+  left: 24px;
+}
+
+.flicker1 {
+  animation: flicker1 8s linear infinite;
+}
+
+.flicker2 {
+  background: none;
+  animation: flicker2 5s linear infinite;
+}

@@ -1,0 +1,12 @@
+.header-outer-container {
+  width: 100%;
+  height: 100px;
+  background: red;
+  position: fixed; }
+
+.header-inner-container {
+  width: 320px;
+  height: 100%;
+  background: green;
+  margin: auto;
+  position: relative; }

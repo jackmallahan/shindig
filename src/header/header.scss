@@ -1,0 +1,33 @@
+.header-outer-container {
+  width: 100%;
+  height: 100px;
+  // background: red;
+  position: fixed;
+}
+
+.header-inner-container {
+  width: 320px;
+  height: 100%;
+  background: black;
+  margin: auto;
+  position: relative;
+  border:3px solid $neonBlue;
+  border-radius: 10px;
+  border-style: inset;
+  animation: border-flicker1 10s linear infinite;
+}
+
+.header-the {
+  @extend .the;
+  top: 5px;
+  left: 133px;
+  transform: rotate(-12deg);
+}
+
+.header-title {
+  @extend h1;
+  top: 24px;
+  left: 102px;
+  font-size: 41px;
+  transform: rotate(-12deg);
+}
