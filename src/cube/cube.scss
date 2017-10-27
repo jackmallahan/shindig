@@ -56,7 +56,7 @@
   background: black;
   position: absolute;
   z-index: -1;
-  border:3px solid $neonBlue;
+  border:3px solid #1086e8;
   border-style: inset;
   transform: translate3d(0, 0, 0);
 }
@@ -93,7 +93,7 @@
 }
 
 .the {
-  color: $neonRed;
+  color: #FF00E6;
   font-family: 'shindig';
   font-size: 30px;
   position: absolute;
@@ -112,7 +112,7 @@
 }
 
 h1 {
-  color: $neonRed;
+  color: #FF00E6;
   font-family: 'shindig';
   font-size: 60px;
   transform: rotate(-31deg);

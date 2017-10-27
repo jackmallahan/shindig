@@ -333,7 +333,7 @@
 .front {
   transform: translateZ(100px); }
 
-.the, .header-the {
+.the {
   color: #FF00E6;
   font-family: 'shindig';
   font-size: 30px;
@@ -349,7 +349,7 @@
 .flicker4 {
   animation: flicker2 4s linear infinite; }
 
-h1, .header-title {
+h1 {
   color: #FF00E6;
   font-family: 'shindig';
   font-size: 60px;
@@ -383,11 +383,27 @@ h1, .header-title {
   animation: border-flicker1 10s linear infinite; }
 
 .header-the {
+  color: #FF00E6;
+  font-family: 'shindig';
+  font-size: 30px;
+  position: absolute;
+  top: 51px;
+  left: 71px;
+  transform: rotate(-31deg);
+  background: none;
   top: 5px;
   left: 133px;
   transform: rotate(-12deg); }
 
 .header-title {
+  color: #FF00E6;
+  font-family: 'shindig';
+  font-size: 60px;
+  transform: rotate(-31deg);
+  background: none;
+  position: absolute;
+  top: 56px;
+  left: 24px;
   top: 24px;
   left: 102px;
   font-size: 41px;

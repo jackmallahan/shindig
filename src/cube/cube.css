@@ -3,9 +3,10 @@
   position: fixed;
   width: 100%;
   height: 250px;
-  top: 200px;
+  top: 100px;
+  z-index: 100;
   animation-name: drop-in;
-  animation-duration: 5s; }
+  animation-duration: 3s; }
 
 .inner-cube-container {
   margin: auto;
@@ -34,7 +35,8 @@
   width: 200px;
   transform-style: preserve-3d;
   animation: spin 30s infinite linear;
-  animation-delay: 5s; }
+  animation-delay: 3s;
+  transform: translate3d(0, 0, 0); }
 
 .cube-face {
   position: absolute;
@@ -49,7 +51,8 @@
   position: absolute;
   z-index: -1;
   border: 3px solid #1086e8;
-  border-style: inset; }
+  border-style: inset;
+  transform: translate3d(0, 0, 0); }
 
 .border-flicker1 {
   animation: border-flicker1 2s linear infinite; }
