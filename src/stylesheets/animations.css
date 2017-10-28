@@ -12,9 +12,9 @@
 
 @keyframes rise {
   0% {
-    top: 1400px; }
+    padding-top: 1400px; }
   100% {
-    top: 330px; } }
+    padding-top: 293px; } }
 
 @keyframes border-flicker2 {
   0% {
@@ -57,6 +57,26 @@
     opacity: 1;
     box-shadow: 0px 0px 78px 4px #1086e8; } }
 
+@keyframes button-flicker1 {
+  0% {
+    opacity: 0.7;
+    box-shadow: 0px 0px 20px 2px #1086e8; }
+  2% {
+    opacity: 1;
+    box-shadow: 0px 0px 20px 2px #1086e8; }
+  2% {
+    opacity: 0.7;
+    box-shadow: 0px 0px 20px 2px #1086e8; }
+  8% {
+    opacity: 1;
+    box-shadow: 0px 0px 20px 2px #1086e8; }
+  70% {
+    opacity: 0.7;
+    box-shadow: 0px 0px 20px 2px #1086e8; }
+  100% {
+    opacity: 1;
+    box-shadow: 0px 0px 20px 2px #1086e8; } }
+
 @keyframes flicker3 {
   0% {
     opacity: 0.1;
@@ -88,22 +108,16 @@
 
 @keyframes border-flicker-red {
   0% {
-    opacity: 0.1;
     box-shadow: 0px 0px 78px 4px #FF00E6; }
   2% {
-    opacity: 1;
     box-shadow: 0px 0px 78px 4px #FF00E6; }
   4% {
-    opacity: 0.1;
     box-shadow: 0px 0px 78px 4px #FF00E6; }
   8% {
-    opacity: 1;
     box-shadow: 0px 0px 78px 4px #FF00E6; }
   70% {
-    opacity: 0.7;
     box-shadow: 0px 0px 78px 4px #FF00E6; }
   100% {
-    opacity: 1;
     box-shadow: 0px 0px 78px 4px #FF00E6; } }
 
 @keyframes flicker1 {

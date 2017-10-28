@@ -1,6 +1,6 @@
 /* cube container */
 .outer-cube-container {
-  position: fixed;
+  position: absolute;
   width: 100%;
   height: 250px;
   top: 100px;
@@ -46,7 +46,7 @@
 .cube-face {
 	position: absolute;
   width: 200px;
-  height: 200px;
+  height: 140px;
   background: black;
 }
 
@@ -101,6 +101,7 @@
   left: 71px;
   transform: rotate(-31deg);
   background: none;
+  display: none;
 }
 
 .flicker3 {
@@ -118,7 +119,7 @@ h1 {
   transform: rotate(-31deg);
   background: none;
   position: absolute;
-  top: 56px;
+  top: 19px;
   left: 24px;
 }
 
