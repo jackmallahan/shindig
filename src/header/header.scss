@@ -1,8 +1,10 @@
 .header-outer-container {
   width: 100%;
-  height: 100px;
+  height: 66px;
   // background: red;
   position: fixed;
+  top: 10px;
+  z-index: 100;
 }
 
 .header-inner-container {
@@ -14,7 +16,12 @@
   border:3px solid #1086e8;
   border-radius: 10px;
   border-style: inset;
-  animation: border-flicker1 10s linear infinite;
+  // animation: border-flicker1 10s linear infinite;
+  box-shadow: 0px 0px 78px 4px #1086e8;
+  &:hover {
+    cursor: pointer;
+    box-shadow: 0px 0px 78px 4px #FF00E6;
+  }
 }
 
 .header-the {
@@ -29,19 +36,16 @@
   top: 5px;
   left: 133px;
   transform: rotate(-12deg);
+  display: none;
 }
 
 .header-title {
   color: #FF00E6;
   font-family: 'shindig';
-  font-size: 60px;
-  transform: rotate(-31deg);
   background: none;
   position: absolute;
-  top: 56px;
-  left: 24px;
-  top: 24px;
+  top: 0px;
   left: 102px;
-  font-size: 41px;
+  font-size: 36px;
   transform: rotate(-12deg);
 }
