@@ -1,5 +1,6 @@
 import React from 'react';
 import introMusic from '../assets/05-Electric-Worm.m4a';
+import { googleSignIn } from '../utils/firebase'
 
 const LoginNavigation = ( { skipLogin, emailLogin } ) => {
 
@@ -8,7 +9,7 @@ const LoginNavigation = ( { skipLogin, emailLogin } ) => {
         <div className='outer-button-container'>
           <div className='inner-button-container'>
             <button className='login-btn login-btn1'>Login with Facebook</button>
-            <button className='login-btn login-btn2'>Login with Google</button>
+            <button className='login-btn login-btn2' onClick={ googleSignIn }>Login with Google</button>
             <button className='login-btn login-btn3' onClick={ emailLogin }>Login with Email</button>
             <button className='login-btn login-btn4'>Create an Account</button>
             <button className='login-btn login-btn4' onClick={ skipLogin }>Skip to Shindig</button>
