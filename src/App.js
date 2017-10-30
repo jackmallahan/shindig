@@ -18,14 +18,14 @@ class App extends Component {
     }
   }
 
-  skipLogin() {
+  skipLogin = () => {
   this.setState({
     loginPageDisplay: false,
     headerDisplay: true
     });
   }
 
-  displayNavigation() {
+  displayNavigation = () => {
     if(this.state.navigationDisplay === false ) {
       this.setState({
         navigationDisplay: true
@@ -37,13 +37,13 @@ class App extends Component {
     }
   }
 
-  emailLogin() {
+  emailLogin = () => {
   this.setState({
     EmailLoginDisplay: true
     });
   }
 
-  exitLogin() {
+  exitLogin = () => {
   this.setState({
     EmailLoginDisplay: false
     });
@@ -55,18 +55,34 @@ class App extends Component {
     return (
       <div className="App">
         < Background />
-        {this.state.loginPageDisplay ? < Cube /> : '' }
-        {this.state.loginPageDisplay ? < LoginNavigation
-          skipLogin = { this.skipLogin.bind(this) }
-          emailLogin = { this.emailLogin.bind(this) }
-          /> : '' }
-        {this.state.headerDisplay ? < Header
-          displayNavigation = { this.displayNavigation.bind(this) }
-          /> : '' }
-        {this.state.navigationDisplay ? < DropNavigation /> : '' }
-        {this.state.EmailLoginDisplay ? < EmailLogin
-          exitLogin = { this.exitLogin.bind(this) }
-          /> : '' }
+        {
+          this.state.loginPageDisplay &&
+          <div>
+            < Cube />
+            <LoginNavigation
+              skipLogin = { this.skipLogin }
+              emailLogin = { this.emailLogin }
+              />
+          </div>
+        }
+
+        { this.state.headerDisplay &&
+          < Header
+          displayNavigation = { this.displayNavigation }
+          />
+        }
+
+        {
+          this.state.navigationDisplay &&
+          < DropNavigation />
+        }
+
+        {
+          this.state.EmailLoginDisplay &&
+          < EmailLogin
+          exitLogin = { this.exitLogin }
+          />
+        }
       </div>
     );
   }
