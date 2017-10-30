@@ -1,8 +1,7 @@
 import React from 'react';
-import introMusic from '../assets/05-Electric-Worm.m4a';
 import { googleSignIn } from '../utils/firebase'
 
-const LoginNavigation = ( { skipLogin, emailLogin } ) => {
+const LoginNavigation = ( { skipLogin } ) => {
 
     return (
       <div className='backdrop'>
@@ -14,10 +13,7 @@ const LoginNavigation = ( { skipLogin, emailLogin } ) => {
           </div>
         </div>
         <p className='copyright'>Copyright © 2017 1705 Development, Inc.</p>
-        <audio poster={introMusic} autoPlay Loop >
-          <source src={introMusic} ></source>
-          <source src={introMusic} ></source>
-        </audio>
+
       </div>
     );
   }
