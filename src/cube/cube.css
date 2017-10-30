@@ -81,17 +81,6 @@
 .front {
   transform: translateZ(100px); }
 
-.the {
-  color: #FF00E6;
-  font-family: 'shindig';
-  font-size: 30px;
-  position: absolute;
-  top: 51px;
-  left: 71px;
-  transform: rotate(-31deg);
-  background: none;
-  display: none; }
-
 .flicker3 {
   animation: flicker3 7s linear infinite; }
 

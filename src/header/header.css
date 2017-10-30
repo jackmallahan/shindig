@@ -19,20 +19,6 @@
     cursor: pointer;
     box-shadow: 0px 0px 78px 4px #FF00E6; }
 
-.header-the {
-  color: #FF00E6;
-  font-family: 'shindig';
-  font-size: 30px;
-  position: absolute;
-  top: 51px;
-  left: 71px;
-  transform: rotate(-31deg);
-  background: none;
-  top: 5px;
-  left: 133px;
-  transform: rotate(-12deg);
-  display: none; }
-
 .header-title {
   color: #FF00E6;
   font-family: 'shindig';

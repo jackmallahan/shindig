@@ -10,13 +10,11 @@ const LoginNavigation = ( { skipLogin, emailLogin } ) => {
           <div className='inner-button-container'>
             <button className='login-btn login-btn1'>Login with Facebook</button>
             <button className='login-btn login-btn2' onClick={ googleSignIn }>Login with Google</button>
-            <button className='login-btn login-btn3' onClick={ emailLogin }>Login with Email</button>
-            <button className='login-btn login-btn4'>Create an Account</button>
             <button className='login-btn login-btn4' onClick={ skipLogin }>Skip to Shindig</button>
           </div>
         </div>
         <p className='copyright'>Copyright © 2017 1705 Development, Inc.</p>
-        <audio poster={introMusic}autoPlay>
+        <audio poster={introMusic} autoPlay Loop >
           <source src={introMusic} ></source>
           <source src={introMusic} ></source>
         </audio>
