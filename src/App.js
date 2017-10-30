@@ -4,8 +4,7 @@ import DropNavigation from './DropNavigation/DropNavigation.js';
 import Background from './Background/Background.js';
 import Cube from './cube/cube.js';
 import LoginNavigation from './LoginNavigation/LoginNavigation.js';
-import EmailLogin from './EmailLogin/EmailLogin.js';
-import { googleSignIn } from './utils/firebase';
+import { googleSignIn, facebookSignIn } from './utils/firebase';
 import './App.css';
 
 class App extends Component {
@@ -24,7 +23,18 @@ class App extends Component {
     googleSignIn().then(user => {
       const { displayName, uid, photoURL, email } = user.user
       this.setState({
-        loggedIn: { name: displayName, id: uid, avatar: photoURL, email: email }, 
+        loggedIn: { name: displayName, id: uid, avatar: photoURL, email: email },
+        loginPageDisplay: false,
+        headerDisplay: true}
+      )
+    })
+  }
+
+  loginWithFacebook() {
+    facebookSignIn().then(user => {
+      const { displayName, uid, photoURL, email } = user.user
+      this.setState({
+        loggedIn: { name: displayName, id: uid, avatar: photoURL, email: email },
         loginPageDisplay: false,
         headerDisplay: true}
       )
@@ -68,13 +78,13 @@ class App extends Component {
             < Cube />
             <LoginNavigation
               skipLogin = { this.skipLogin }
-              emailLogin = { this.emailLogin }
               loginWithGoogle = { this.loginWithGoogle.bind(this) }
+              loginWithFacebook = { this.loginWithFacebook.bind(this) }
               />
           </div>
         }
 
-        { 
+        {
           this.state.headerDisplay &&
           < Header
           displayNavigation = { this.displayNavigation }
