@@ -14,7 +14,6 @@ class App extends Component {
       loginPageDisplay: true,
       headerDisplay: false,
       navigationDisplay: false,
-      EmailLoginDisplay: false
     }
   }
 
@@ -37,15 +36,9 @@ class App extends Component {
     }
   }
 
-  emailLogin = () => {
+  exitMenu = () => {
   this.setState({
-    EmailLoginDisplay: true
-    });
-  }
 
-  exitLogin = () => {
-  this.setState({
-    EmailLoginDisplay: false
     });
   }
 
@@ -77,12 +70,7 @@ class App extends Component {
           < DropNavigation />
         }
 
-        {
-          this.state.EmailLoginDisplay &&
-          < EmailLogin
-          exitLogin = { this.exitLogin }
-          />
-        }
+
       </div>
     );
   }
