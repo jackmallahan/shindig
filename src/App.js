@@ -4,7 +4,6 @@ import DropNavigation from './DropNavigation/DropNavigation.js';
 import Background from './Background/Background.js';
 import Cube from './cube/cube.js';
 import LoginNavigation from './LoginNavigation/LoginNavigation.js';
-import EmailLogin from './EmailLogin/EmailLogin.js';
 import { googleSignIn } from './utils/firebase';
 import './App.css';
 
