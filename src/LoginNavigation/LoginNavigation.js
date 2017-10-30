@@ -1,5 +1,5 @@
 import React from 'react';
-// import introMusic from '../assets/05-Electric-Worm.m4a';
+import introMusic from '../assets/05-Electric-Worm.m4a';
 
 const LoginNavigation = ( { skipLogin, emailLogin, loginWithGoogle } ) => {
 
@@ -15,10 +15,10 @@ const LoginNavigation = ( { skipLogin, emailLogin, loginWithGoogle } ) => {
           </div>
         </div>
         <p className='copyright'>Copyright © 2017 1705 Development, Inc.</p>
-        {/*<audio poster={introMusic}autoPlay>
+        <audio poster={introMusic}autoPlay>
           <source src={introMusic} ></source>
           <source src={introMusic} ></source>
-        </audio>*/}
+        </audio>
       </div>
     );
   }
