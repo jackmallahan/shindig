@@ -1,15 +1,15 @@
 .outer-drop-container {
   width: 100%;
   position: absolute;
-  top: 74px;
+  top: 95px;
   z-index: 101;
-  animation-name: drop-in-nav;
+  animation-name: pref-drop-in-nav;
   animation-duration: 1s; }
 
 .drop-login-container {
   margin: auto;
   width: 300px;
-  height: 300px;
+  height: 500px;
   background: black;
   border: 3px solid #1086e8;
   border-radius: 10px;
@@ -20,28 +20,38 @@
   justify-content: center;
   flex-direction: column; }
 
-@keyframes drop-in-nav {
+@keyframes pref-drop-in-nav {
   0% {
     top: -500px; }
   100% {
-    top: 74px; } }
+    top: 95px; } }
 
-.sign-in-title {
+.drop-in-title {
   font-size: 24px;
   margin: 2px;
+  margin-bottom: 10px;
   font-family: 'shindig';
   color: #FF00E6;
   animation: flicker3 6s linear infinite; }
 
-.login-input {
-  width: 246px;
-  height: 32px;
-  padding-left: 10px;
-  margin-top: 10px;
-  border: 3px solid #1086e8;
-  border-radius: 20px;
+.preferences-container {
+  margin-bottom: 10px; }
+
+.prefernces-list {
+  height: 260px;
+  overflow: scroll; }
+
+.checkbox-container {
+  display: flex;
+  align-items: center;
+  justify-content: center; }
+
+.checkbox {
+  display: inline-block; }
+
+.checkbox-label {
   font-size: 14px;
+  display: inline-block;
+  margin: 4px 0 4px 4px;
   font-family: 'goodTimes';
   color: #FF00E6; }
-  .login-input:focus {
-    outline: none; }

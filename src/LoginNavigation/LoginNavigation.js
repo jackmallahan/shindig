@@ -2,7 +2,6 @@ import React from 'react';
 import introMusic from '../assets/05-Electric-Worm.m4a';
 
 const LoginNavigation = ( { skipLogin, emailLogin, loginWithGoogle, loginWithFacebook } ) => {
-
     return (
       <div className='backdrop'>
         <div className='outer-button-container'>
@@ -14,10 +13,7 @@ const LoginNavigation = ( { skipLogin, emailLogin, loginWithGoogle, loginWithFac
           </div>
         </div>
         <p className='copyright'>Copyright © 2017 1705 Development, Inc.</p>
-        <audio poster={introMusic} autoPlay Loop >
-          <source src={introMusic} ></source>
-          <source src={introMusic} ></source>
-        </audio>
+
       </div>
     );
   }

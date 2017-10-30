@@ -5,6 +5,7 @@ import Background from './Background/Background.js';
 import Cube from './cube/cube.js';
 import LoginNavigation from './LoginNavigation/LoginNavigation.js';
 import { googleSignIn, facebookSignIn } from './utils/firebase';
+import UserPreferences from './UserPreferences/UserPreferences.js';
 import './App.css';
 
 class App extends Component {
@@ -16,6 +17,7 @@ class App extends Component {
       navigationDisplay: false,
       EmailLoginDisplay: false,
       loggedIn: {}
+      UserPreferencesDisplay: false
     }
   }
 
@@ -60,9 +62,16 @@ class App extends Component {
     }
   }
 
-  exitMenu = () => {
+  userPreferences = () => {
   this.setState({
+    UserPreferencesDisplay: true
+    });
+  }
 
+  exitLogin = () => {
+  this.setState({
+    navigationDisplay: false,
+    UserPreferencesDisplay: false
     });
   }
 
@@ -71,7 +80,11 @@ class App extends Component {
 
     return (
       <div className="App">
-        < Background />
+
+        < Background
+          exitLogin = { this.exitLogin }
+        />
+
         {
           this.state.loginPageDisplay &&
           <div>
@@ -87,13 +100,22 @@ class App extends Component {
         {
           this.state.headerDisplay &&
           < Header
-          displayNavigation = { this.displayNavigation }
+            displayNavigation = { this.displayNavigation }
           />
         }
 
         {
           this.state.navigationDisplay &&
-          < DropNavigation />
+          < DropNavigation
+            userPreferences = { this.userPreferences }
+          />
+        }
+
+        {
+          this.state.UserPreferencesDisplay &&
+          < UserPreferences
+            exitLogin = { this.exitLogin }
+          />
         }
       </div>
     );
