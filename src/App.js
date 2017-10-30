@@ -4,7 +4,7 @@ import DropNavigation from './DropNavigation/DropNavigation.js';
 import Background from './Background/Background.js';
 import Cube from './cube/cube.js';
 import LoginNavigation from './LoginNavigation/LoginNavigation.js';
-import EmailLogin from './EmailLogin/EmailLogin.js';
+import { googleSignIn } from './utils/firebase';
 import './App.css';
 
 class App extends Component {
@@ -14,15 +14,28 @@ class App extends Component {
       loginPageDisplay: true,
       headerDisplay: false,
       navigationDisplay: false,
+      EmailLoginDisplay: false,
+      loggedIn: {}
     }
   }
 
-  skipLogin = () => {
-  this.setState({
-    loginPageDisplay: false,
-    headerDisplay: true
-    });
+  loginWithGoogle() {
+    googleSignIn().then(user => {
+      const { displayName, uid, photoURL, email } = user.user
+      this.setState({
+        loggedIn: { name: displayName, id: uid, avatar: photoURL, email: email }, 
+        loginPageDisplay: false,
+        headerDisplay: true}
+      )
+    })
   }
+
+  skipLogin() {
+    this.setState({
+      loginPageDisplay: false,
+      headerDisplay: true
+      });
+    }
 
   displayNavigation = () => {
     if(this.state.navigationDisplay === false ) {
@@ -55,11 +68,13 @@ class App extends Component {
             <LoginNavigation
               skipLogin = { this.skipLogin }
               emailLogin = { this.emailLogin }
+              loginWithGoogle = { this.loginWithGoogle.bind(this) }
               />
           </div>
         }
 
-        { this.state.headerDisplay &&
+        { 
+          this.state.headerDisplay &&
           < Header
           displayNavigation = { this.displayNavigation }
           />
@@ -69,8 +84,6 @@ class App extends Component {
           this.state.navigationDisplay &&
           < DropNavigation />
         }
-
-
       </div>
     );
   }
