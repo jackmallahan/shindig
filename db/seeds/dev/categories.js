@@ -1,5 +1,4 @@
 const categories = require('../../../data/categoriesList.json');
-// const pokemon = require('../../../pokemon-data.json');
 
 const createCategory = (knex, category) => {
   return knex('categories').insert({
