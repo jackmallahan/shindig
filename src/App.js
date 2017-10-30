@@ -5,6 +5,7 @@ import Background from './Background/Background.js';
 import Cube from './cube/cube.js';
 import LoginNavigation from './LoginNavigation/LoginNavigation.js';
 import EmailLogin from './EmailLogin/EmailLogin.js';
+import { googleSignIn } from './utils/firebase';
 import './App.css';
 
 class App extends Component {
@@ -14,8 +15,20 @@ class App extends Component {
       loginPageDisplay: true,
       headerDisplay: false,
       navigationDisplay: false,
-      EmailLoginDisplay: false
+      EmailLoginDisplay: false,
+      loggedIn: {}
     }
+  }
+
+  loginWithGoogle() {
+    googleSignIn().then(user => {
+      const { displayName, uid, photoURL, email } = user.user
+      this.setState({
+        loggedIn: { name: displayName, id: uid, avatar: photoURL, email: email }, 
+        loginPageDisplay: false,
+        headerDisplay: true}
+      )
+    })
   }
 
   skipLogin() {
@@ -59,6 +72,7 @@ class App extends Component {
         {this.state.loginPageDisplay ? < LoginNavigation
           skipLogin = { this.skipLogin.bind(this) }
           emailLogin = { this.emailLogin.bind(this) }
+          loginWithGoogle = { this.loginWithGoogle.bind(this) }
           /> : '' }
         {this.state.headerDisplay ? < Header
           displayNavigation = { this.displayNavigation.bind(this) }
