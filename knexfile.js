@@ -12,6 +12,18 @@ module.exports = {
     useNullAsDefault: true
   },
 
+  test: {
+  client: 'pg',
+  connection: process.env.DATABASE_URL || 'postgres://localhost/jetfueltest',
+  useNullAsDefault: true,
+  migrations: {
+    directory: './db/migrations'
+  },
+  seeds: {
+    directory: './db/test/seeds'
+    }
+  },
+
   staging: {
     client: 'postgresql',
     connection: {

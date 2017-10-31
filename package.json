@@ -2,6 +2,10 @@
   "name": "shindig",
   "version": "0.1.0",
   "private": true,
+  "scripts": {
+    "test": "./node_modules/.bin/mocha",
+    "start": "node server.js"
+  },
   "dependencies": {
     "express": "^4.16.2",
     "firebase": "^4.6.0",
