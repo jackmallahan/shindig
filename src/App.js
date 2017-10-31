@@ -4,7 +4,7 @@ import DropNavigation from './DropNavigation/DropNavigation.js';
 import Background from './Background/Background.js';
 import Cube from './cube/cube.js';
 import LoginNavigation from './LoginNavigation/LoginNavigation.js';
-import { googleSignIn, facebookSignIn } from './utils/firebase';
+import { googleSignIn, facebookSignIn, signOut } from './utils/firebase';
 import UserPreferences from './UserPreferences/UserPreferences.js';
 import './App.css';
 
@@ -16,34 +16,34 @@ class App extends Component {
       headerDisplay: false,
       navigationDisplay: false,
       EmailLoginDisplay: false,
-      loggedIn: {}
+      userObj: {},
       UserPreferencesDisplay: false
     }
   }
 
-  loginWithGoogle() {
+  loginWithGoogle = () => {
     googleSignIn().then(user => {
       const { displayName, uid, photoURL, email } = user.user
       this.setState({
-        loggedIn: { name: displayName, id: uid, avatar: photoURL, email: email },
+        userObj: { name: displayName, id: uid, avatar: photoURL, email: email },
         loginPageDisplay: false,
-        headerDisplay: true}
-      )
+        headerDisplay: true
+      })
     })
   }
 
-  loginWithFacebook() {
+  loginWithFacebook = () => {
     facebookSignIn().then(user => {
       const { displayName, uid, photoURL, email } = user.user
       this.setState({
-        loggedIn: { name: displayName, id: uid, avatar: photoURL, email: email },
+        userObj: { name: displayName, id: uid, avatar: photoURL, email: email },
         loginPageDisplay: false,
         headerDisplay: true}
       )
     })
   }
 
-  skipLogin() {
+  skipLogin = () => {
     this.setState({
       loginPageDisplay: false,
       headerDisplay: true
@@ -75,6 +75,17 @@ class App extends Component {
     });
   }
 
+  signOut = () => {
+    console.log('click');
+    signOut();
+    this.setState({
+      userObj: {},
+      loginPageDisplay: true,
+      headerDisplay: false
+    })
+    this.exitLogin();
+  }
+
 
   render() {
 
@@ -91,8 +102,8 @@ class App extends Component {
             < Cube />
             <LoginNavigation
               skipLogin = { this.skipLogin }
-              loginWithGoogle = { this.loginWithGoogle.bind(this) }
-              loginWithFacebook = { this.loginWithFacebook.bind(this) }
+              loginWithGoogle = { this.loginWithGoogle }
+              loginWithFacebook = { this.loginWithFacebook }
               />
           </div>
         }
@@ -108,6 +119,7 @@ class App extends Component {
           this.state.navigationDisplay &&
           < DropNavigation
             userPreferences = { this.userPreferences }
+            signOut = { this.signOut }
           />
         }
 
