@@ -1,14 +1,14 @@
 import React from 'react';
-import { googleSignIn } from '../utils/firebase'
+import introMusic from '../assets/05-Electric-Worm.m4a';
 
-const LoginNavigation = ( { skipLogin } ) => {
-
+const LoginNavigation = ( { skipLogin, emailLogin, loginWithGoogle, loginWithFacebook } ) => {
     return (
       <div className='backdrop'>
         <div className='outer-button-container'>
           <div className='inner-button-container'>
-            <button className='login-btn login-btn1'>Login with Facebook</button>
-            <button className='login-btn login-btn2' onClick={ googleSignIn }>Login with Google</button>
+            <button className='login-btn login-btn1' onClick={ loginWithFacebook }>Login with Facebook</button>
+            <button className='login-btn login-btn2' onClick={ loginWithGoogle }>Login with Google</button>
+            <button className='login-btn login-btn4'>Create an Account</button>
             <button className='login-btn login-btn4' onClick={ skipLogin }>Skip to Shindig</button>
           </div>
         </div>

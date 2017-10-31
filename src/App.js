@@ -4,6 +4,7 @@ import DropNavigation from './DropNavigation/DropNavigation.js';
 import Background from './Background/Background.js';
 import Cube from './cube/cube.js';
 import LoginNavigation from './LoginNavigation/LoginNavigation.js';
+import { googleSignIn, facebookSignIn } from './utils/firebase';
 import UserPreferences from './UserPreferences/UserPreferences.js';
 import './App.css';
 
@@ -14,16 +15,40 @@ class App extends Component {
       loginPageDisplay: true,
       headerDisplay: false,
       navigationDisplay: false,
+      EmailLoginDisplay: false,
+      loggedIn: {}
       UserPreferencesDisplay: false
     }
   }
 
-  skipLogin = () => {
-  this.setState({
-    loginPageDisplay: false,
-    headerDisplay: true
-    });
+  loginWithGoogle() {
+    googleSignIn().then(user => {
+      const { displayName, uid, photoURL, email } = user.user
+      this.setState({
+        loggedIn: { name: displayName, id: uid, avatar: photoURL, email: email },
+        loginPageDisplay: false,
+        headerDisplay: true}
+      )
+    })
   }
+
+  loginWithFacebook() {
+    facebookSignIn().then(user => {
+      const { displayName, uid, photoURL, email } = user.user
+      this.setState({
+        loggedIn: { name: displayName, id: uid, avatar: photoURL, email: email },
+        loginPageDisplay: false,
+        headerDisplay: true}
+      )
+    })
+  }
+
+  skipLogin() {
+    this.setState({
+      loginPageDisplay: false,
+      headerDisplay: true
+      });
+    }
 
   displayNavigation = () => {
     if(this.state.navigationDisplay === false ) {
@@ -66,11 +91,14 @@ class App extends Component {
             < Cube />
             <LoginNavigation
               skipLogin = { this.skipLogin }
+              loginWithGoogle = { this.loginWithGoogle.bind(this) }
+              loginWithFacebook = { this.loginWithFacebook.bind(this) }
               />
           </div>
         }
 
-        { this.state.headerDisplay &&
+        {
+          this.state.headerDisplay &&
           < Header
             displayNavigation = { this.displayNavigation }
           />
@@ -89,8 +117,6 @@ class App extends Component {
             exitLogin = { this.exitLogin }
           />
         }
-
-
       </div>
     );
   }
