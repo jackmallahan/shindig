@@ -6,6 +6,7 @@ import Cube from './cube/cube.js';
 import LoginNavigation from './LoginNavigation/LoginNavigation.js';
 import { googleSignIn, facebookSignIn, signOut } from './utils/firebase';
 import UserPreferences from './UserPreferences/UserPreferences.js';
+import CreateEvent from './CreateEvent/CreateEvent.js';
 import './App.css';
 
 class App extends Component {
@@ -17,7 +18,8 @@ class App extends Component {
       navigationDisplay: false,
       EmailLoginDisplay: false,
       userObj: {},
-      UserPreferencesDisplay: false
+      UserPreferencesDisplay: false,
+      createEventDisplay: false
     }
   }
 
@@ -68,10 +70,17 @@ class App extends Component {
     });
   }
 
+  createEvent = () => {
+  this.setState({
+    createEventDisplay: true
+    });
+  }
+
   exitLogin = () => {
   this.setState({
     navigationDisplay: false,
-    UserPreferencesDisplay: false
+    UserPreferencesDisplay: false,
+    createEventDisplay: false
     });
   }
 
@@ -119,6 +128,7 @@ class App extends Component {
           this.state.navigationDisplay &&
           < DropNavigation
             userPreferences = { this.userPreferences }
+            createEvent = { this.createEvent }
             signOut = { this.signOut }
           />
         }
@@ -129,6 +139,14 @@ class App extends Component {
             exitLogin = { this.exitLogin }
           />
         }
+
+        {
+          this.state.createEventDisplay &&
+          < CreateEvent
+            exitLogin = { this.exitLogin }
+          />
+        }
+
       </div>
     );
   }
