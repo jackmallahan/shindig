@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 
-
 class CreateEvent extends Component {
   constructor() {
     super();
@@ -42,6 +41,5 @@ class CreateEvent extends Component {
     );
   }
 }
-
 
 export default CreateEvent;
