@@ -9,8 +9,16 @@
   border: 3px solid #1086e8;
   border-radius: 20px;
   padding-left: 10px;
+  box-shadow: 0px 0px 25px 2px #1086e8;
 }
 
 .event-input:focus  {
   outline: none;
+}
+
+.error-message  {
+  font-size: 14px;
+  font-family: 'goodTimes';
+  color: #FF00E6;
+  text-align: center;
 }

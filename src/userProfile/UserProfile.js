@@ -8,8 +8,6 @@ class UserProfile extends Component {
     }
   }
 
-
-
   render() {
 
     const { exitLogin, userInfo } = this.props;

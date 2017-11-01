@@ -311,7 +311,15 @@ h1 {
   height: 66px;
   position: fixed;
   top: 10px;
-  z-index: 100; }
+  z-index: 100;
+  animation-name: drop-in-header;
+  animation-duration: 1s; }
+
+@keyframes drop-in-header {
+  0% {
+    top: -200px; }
+  100% {
+    top: 10px; } }
 
 .header-inner-container {
   width: 320px;
@@ -572,10 +580,17 @@ input:checked ~ label {
   margin-top: 16px;
   border: 3px solid #1086e8;
   border-radius: 20px;
-  padding-left: 10px; }
+  padding-left: 10px;
+  box-shadow: 0px 0px 25px 2px #1086e8; }
 
 .event-input:focus {
   outline: none; }
+
+.error-message {
+  font-size: 14px;
+  font-family: 'goodTimes';
+  color: #FF00E6;
+  text-align: center; }
 
 .user-name {
   font-size: 11px;
