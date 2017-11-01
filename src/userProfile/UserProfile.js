@@ -12,15 +12,17 @@ class UserProfile extends Component {
 
   render() {
 
-    const { exitLogin } = this.props;
+    const { exitLogin, userInfo } = this.props;
 
     return (
       <div className='outer-drop-container'>
         <div className='drop-login-container'>
           <p className='drop-in-title'>User Profile</p>
-
-
-
+          <div className='avatar-container'>
+            <img className='user-avatar' src={ userInfo.avatar }/>
+          </div>
+          <p className='user-name'>{ userInfo.name ? (`User: ${userInfo.name} `) : 'No User Logged In' }</p>
+          <p className='user-name'>{ userInfo.email ? (`Email: ${userInfo.email} `) : 'No email' }</p>
 
           <button className='nav-btn' onClick={ exitLogin }>Exit</button>
 

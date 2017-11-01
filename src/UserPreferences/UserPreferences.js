@@ -17,6 +17,7 @@ class UserPreferences extends Component {
         this.preferences.push(eventId)
       }
     })
+    this.props.exitLogin()
   }
 
   render() {
