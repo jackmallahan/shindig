@@ -93,6 +93,18 @@ class App extends Component {
     });
   }
 
+  login = () => {
+  this.setState({
+    loginPageDisplay: true,
+    headerDisplay: false,
+    navigationDisplay: false,
+    EmailLoginDisplay: false,
+    UserPreferencesDisplay: false,
+    createEventDisplay: false,
+    userProfileDisplay: false,
+    });
+  }
+
   signOut = () => {
     console.log('click');
     signOut();
@@ -141,7 +153,9 @@ class App extends Component {
             userPreferences = { this.userPreferences }
             createEvent = { this.createEvent }
             userProfile = { this.userProfile }
+            login = { this.login }
             signOut = { this.signOut }
+            userInfo = { this.state.userObj }
           />
         }
 
