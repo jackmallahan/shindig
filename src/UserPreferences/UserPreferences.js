@@ -1,6 +1,26 @@
-import React from 'react';
+import React, { Component } from "react";
 
-const UserPreferences = ( {exitLogin} ) => {
+class UserPreferences extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+    };
+    this.preferences = []
+  }
+
+  selectedEvents = () => {
+    this.preferences = []
+    const events = document.querySelectorAll('.checkbox')
+    events.forEach((event) => {
+      if(event.checked === true) {
+        let eventId = parseInt(event.value)
+        this.preferences.push(eventId)
+      }
+    })
+  }
+
+  render() {
+      const { exitLogin } = this.props;
 
   return (
     <div className='outer-drop-container'>
@@ -8,140 +28,120 @@ const UserPreferences = ( {exitLogin} ) => {
         <p className='drop-in-title'>User Preferences</p>
         <div className='preferences-container'>
           <ul className='prefernces-list'>
+
             <li className='checkbox-container'>
-              <input type='checkbox' className='checkbox' name='Music' />
-              <label htmlFor='Music'>
-                <p className='checkbox-label'>Music</p>
-              </label>
+              <input type='checkbox' id='checkbox1' className='checkbox' name='Music' value='103'/>
+              <label className='checkbox-label' htmlFor='checkbox1'>Music</label>
             </li>
+
             <li className='checkbox-container'>
-              <input type='checkbox' className='checkbox' name='Business & Professional' />
-              <label htmlFor='Business & Professional'>
-                <p className='checkbox-label'>Business & Professional</p>
-              </label>
+              <input type='checkbox' id='checkbox2' className='checkbox' name='Business & Professional' value='101'/>
+              <label className='checkbox-label' htmlFor='checkbox2'>Business</label>
             </li>
+
             <li className='checkbox-container'>
-              <input type='checkbox' className='checkbox' name='Food & Drink' />
-              <label htmlFor='Food & Drink'>
-                <p className='checkbox-label'>Food & Drink</p>
-              </label>
+              <input type='checkbox' id='checkbox3' className='checkbox' name='Food & Drink' value='110'/>
+              <label className='checkbox-label' htmlFor='checkbox3'>Food & Drink</label>
             </li>
+
             <li className='checkbox-container'>
-              <input type='checkbox' className='checkbox' name='Community & Culture' />
-              <label htmlFor='Community & Culture'>
-                <p className='checkbox-label'>Community & Culture</p>
-              </label>
+              <input type='checkbox' id='checkbox4' className='checkbox' name='Community & Culture' value='113'/>
+              <label className='checkbox-label' htmlFor='checkbox4'>Culture</label>
             </li>
+
             <li className='checkbox-container'>
-              <input type='checkbox' className='checkbox' name='Performing & Visual Arts' />
-              <label htmlFor='Performing & Visual Arts'>
-                <p className='checkbox-label'>Performing & Visual Arts</p>
-              </label>
+              <input type='checkbox' id='checkbox5' className='checkbox' name='Performing & Visual Arts' value='105'/>
+              <label className='checkbox-label' htmlFor='checkbox5'>Performing Arts</label>
             </li>
+
             <li className='checkbox-container'>
-              <input type='checkbox' className='checkbox' name='Film, Media & Entertainment' />
-              <label htmlFor='Film, Media & Entertainment'>
-                <p className='checkbox-label'>Film, Media & Entertainment</p>
-              </label>
+              <input type='checkbox' id='checkbox6' className='checkbox' name='Film, Media & Entertainment' value='104'/>
+              <label className='checkbox-label' htmlFor='checkbox6'>Film</label>
             </li>
+
             <li className='checkbox-container'>
-              <input type='checkbox' className='checkbox' name='Sports & Fitness' />
-              <label htmlFor='Sports & Fitness'>
-                <p className='checkbox-label'>Sports & Fitness</p>
-              </label>
+              <input type='checkbox' id='checkbox7' className='checkbox' name='Sports & Fitness' value='108'/>
+              <label className='checkbox-label' htmlFor='checkbox7'>Sports</label>
             </li>
+
             <li className='checkbox-container'>
-              <input type='checkbox' className='checkbox' name='Health & Wellness' />
-              <label htmlFor='Health & Wellness'>
-                <p className='checkbox-label'>Health & Wellness</p>
-              </label>
+              <input type='checkbox' id='checkbox8' className='checkbox' name='Health & Wellness' value='107'/>
+              <label className='checkbox-label' htmlFor='checkbox8'>Wellness</label>
             </li>
+
             <li className='checkbox-container'>
-              <input type='checkbox' className='checkbox' name='Science & Technology' />
-              <label htmlFor='Science & Technology'>
-                <p className='checkbox-label'>Science & Technology</p>
-              </label>
+              <input type='checkbox' id='checkbox9' className='checkbox' name='Science & Technology' value='102'/>
+              <label className='checkbox-label' htmlFor='checkbox9'>Science</label>
             </li>
+
             <li className='checkbox-container'>
-              <input type='checkbox' className='checkbox' name='Travel & Outdoor' />
-              <label htmlFor='Travel & Outdoor'>
-                <p className='checkbox-label'>Travel & Outdoor</p>
-              </label>
+              <input type='checkbox' id='checkbox10' className='checkbox' name='Travel & Outdoor' value='109'/>
+              <label className='checkbox-label' htmlFor='checkbox10'>Travel</label>
             </li>
+
             <li className='checkbox-container'>
-              <input type='checkbox' className='checkbox' name='Charity & Causes' />
-              <label htmlFor='Charity & Causes'>
-                <p className='checkbox-label'>Charity & Causes</p>
-              </label>
+              <input type='checkbox' id='checkbox11' className='checkbox' name='Charity & Causes' value='111'/>
+              <label className='checkbox-label' htmlFor='checkbox11'>Charity</label>
             </li>
+
             <li className='checkbox-container'>
-              <input type='checkbox' className='checkbox' name='Religion & Spirituality' />
-              <label htmlFor='Religion & Spirituality'>
-                <p className='checkbox-label'>Religion & Spirituality</p>
-              </label>
+              <input type='checkbox' id='checkbox12' className='checkbox' name='Religion & Spirituality' value='114'/>
+              <label className='checkbox-label' htmlFor='checkbox12'>Religion</label>
             </li>
+
             <li className='checkbox-container'>
-              <input type='checkbox' className='checkbox' name='Family & Education' />
-              <label htmlFor='Family & Education'>
-                <p className='checkbox-label'>Family & Education</p>
-              </label>
+              <input type='checkbox' id='checkbox13' className='checkbox' name='Family & Education' value='115'/>
+              <label className='checkbox-label' htmlFor='checkbox13'>Education</label>
             </li>
+
             <li className='checkbox-container'>
-              <input type='checkbox' className='checkbox' name='Seasonal & Holiday' />
-              <label htmlFor='Seasonal & Holiday'>
-                <p className='checkbox-label'>Seasonal & Holiday</p>
-              </label>
+              <input type='checkbox' id='checkbox14' className='checkbox' name='Seasonal & Holiday' value='116'/>
+              <label className='checkbox-label' htmlFor='checkbox14'>Holiday</label>
             </li>
+
             <li className='checkbox-container'>
-              <input type='checkbox' className='checkbox' name='Government & Politics' />
-              <label htmlFor='Government & Politics'>
-                <p className='checkbox-label'>Government & Politics</p>
-              </label>
+              <input type='checkbox' id='checkbox15' className='checkbox' name='Government & Politics' value='112'/>
+              <label className='checkbox-label' htmlFor='checkbox15'>Politics</label>
             </li>
+
             <li className='checkbox-container'>
-              <input type='checkbox' className='checkbox' name='Fashion & Beauty' />
-              <label htmlFor='Fashion & Beauty'>
-                <p className='checkbox-label'>Fashion & Beauty</p>
-              </label>
+              <input type='checkbox' id='checkbox16' className='checkbox' name='Fashion & Beauty' value='106'/>
+              <label className='checkbox-label' htmlFor='checkbox16'>Fashion</label>
             </li>
+
             <li className='checkbox-container'>
-              <input type='checkbox' className='checkbox' name='Home & Lifestyle' />
-              <label htmlFor='Home & Lifestyle'>
-                <p className='checkbox-label'>Home & Lifestyle</p>
-              </label>
+              <input type='checkbox' id='checkbox17' className='checkbox' name='Home & Lifestyle' value='117'/>
+              <label className='checkbox-label' htmlFor='checkbox17'>Lifestyle</label>
             </li>
+
             <li className='checkbox-container'>
-              <input type='checkbox' className='checkbox' name='Auto, Boat & Air' />
-              <label htmlFor='Auto, Boat & Air'>
-                <p className='checkbox-label'>Auto, Boat & Air</p>
-              </label>
+              <input type='checkbox' id='checkbox18' className='checkbox' name='Auto, Boat & Air' value='118'/>
+              <label className='checkbox-label' htmlFor='checkbox18'>Auto, Boat & Air</label>
             </li>
+
             <li className='checkbox-container'>
-              <input type='checkbox' className='checkbox' name='Hobbies & Special Interest' />
-              <label htmlFor='Hobbies & Special Interest'>
-                <p className='checkbox-label'>Hobbies & Special Interest</p>
-              </label>
+              <input type='checkbox' id='checkbox19' className='checkbox' name='Hobbies & Special Interest' value='119'/>
+              <label className='checkbox-label' htmlFor='checkbox19'>Hobbies</label>
             </li>
+
             <li className='checkbox-container'>
-              <input type='checkbox' className='checkbox' name='Other' />
-              <label htmlFor='Other'>
-                <p className='checkbox-label'>Other</p>
-              </label>
+              <input type='checkbox' id='checkbox20' className='checkbox' name='Other' value='199'/>
+              <label className='checkbox-label' htmlFor='checkbox20'>Other</label>
             </li>
+
             <li className='checkbox-container'>
-              <input type='checkbox' className='checkbox' name='School Activities' />
-              <label htmlFor='School Activities'>
-                <p className='checkbox-label'>School Activities</p>
-              </label>
+              <input type='checkbox' id='checkbox21' className='checkbox' name='School Activities' value='120'/>
+              <label className='checkbox-label' htmlFor='checkbox21'>School</label>
             </li>
+
           </ul>
         </div>
-        <button className='nav-btn'>Update Preferences</button>
+        <button className='nav-btn' onClick={() => this.selectedEvents() }>Update Preferences</button>
         <button className='nav-btn' onClick={ exitLogin }>Exit</button>
       </div>
     </div>
   );
-
+}
 }
 
 export default UserPreferences;
