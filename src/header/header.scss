@@ -1,10 +1,16 @@
 .header-outer-container {
   width: 100%;
   height: 66px;
-  // background: red;
   position: fixed;
   top: 10px;
   z-index: 100;
+  animation-name: drop-in-header;
+  animation-duration: 1s;
+}
+
+@keyframes drop-in-header {
+	0% { top: -200px; }
+	100% { top: 10px; }
 }
 
 .header-inner-container {

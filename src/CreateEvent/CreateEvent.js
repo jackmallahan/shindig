@@ -4,8 +4,9 @@ class CreateEvent extends Component {
   constructor() {
     super();
     this.state = {
-
+      invalidEvent: false
     }
+
   }
 
   eventInfo = () => {
@@ -13,7 +14,11 @@ class CreateEvent extends Component {
     const location = document.getElementById('event-location').value;
     const date = document.getElementById('event-date').value;
     const cost = document.getElementById('event-cost').value;
-    this.props.exitLogin()
+    if( name.length && location.length && date.length && cost.length >= 1) {
+      this.props.exitLogin()
+    } else {
+      this.setState({ invalidEvent: true });
+    }
   }
 
   render() {
@@ -24,6 +29,8 @@ class CreateEvent extends Component {
       <div className='outer-drop-container'>
         <div className='drop-login-container'>
           <p className='drop-in-title'>Create Event</p>
+
+          { this.state.invalidEvent && <div className='error-message'><p>INVALID:</p><p>Complete All Fields</p></div>}
 
           <input type='text' id='event-name' className='event-input' placeholder='Enter Event Name'/>
 

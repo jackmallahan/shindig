@@ -3,7 +3,15 @@
   height: 66px;
   position: fixed;
   top: 10px;
-  z-index: 100; }
+  z-index: 100;
+  animation-name: drop-in-header;
+  animation-duration: 1s; }
+
+@keyframes drop-in-header {
+  0% {
+    top: -200px; }
+  100% {
+    top: 10px; } }
 
 .header-inner-container {
   width: 320px;
