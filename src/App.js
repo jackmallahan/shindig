@@ -18,10 +18,10 @@ class App extends Component {
       headerDisplay: false,
       navigationDisplay: false,
       EmailLoginDisplay: false,
-      userObj: {},
       UserPreferencesDisplay: false,
       createEventDisplay: false,
-      userProfileDisplay: false
+      userProfileDisplay: false,
+      userObj: {}
     }
   }
 
@@ -107,6 +107,8 @@ class App extends Component {
 
   render() {
 
+    console.log(this.state.userObj);
+
     return (
       <div className="App">
 
@@ -161,6 +163,7 @@ class App extends Component {
           this.state.userProfileDisplay &&
           < UserProfile
             exitLogin = { this.exitLogin }
+            userInfo = { this.state.userObj }
           />
         }
 
