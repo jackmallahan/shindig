@@ -7,6 +7,7 @@ import LoginNavigation from './LoginNavigation/LoginNavigation.js';
 import { googleSignIn, facebookSignIn, signOut } from './utils/firebase';
 import UserPreferences from './UserPreferences/UserPreferences.js';
 import CreateEvent from './CreateEvent/CreateEvent.js';
+import UserProfile from './userProfile/UserProfile.js';
 import './App.css';
 
 class App extends Component {
@@ -19,7 +20,8 @@ class App extends Component {
       EmailLoginDisplay: false,
       userObj: {},
       UserPreferencesDisplay: false,
-      createEventDisplay: false
+      createEventDisplay: false,
+      userProfileDisplay: false
     }
   }
 
@@ -76,11 +78,18 @@ class App extends Component {
     });
   }
 
+  userProfile = () => {
+  this.setState({
+    userProfileDisplay: true
+    });
+  }
+
   exitLogin = () => {
   this.setState({
     navigationDisplay: false,
     UserPreferencesDisplay: false,
-    createEventDisplay: false
+    createEventDisplay: false,
+    userProfileDisplay: false
     });
   }
 
@@ -129,6 +138,7 @@ class App extends Component {
           < DropNavigation
             userPreferences = { this.userPreferences }
             createEvent = { this.createEvent }
+            userProfile = { this.userProfile }
             signOut = { this.signOut }
           />
         }
@@ -143,6 +153,13 @@ class App extends Component {
         {
           this.state.createEventDisplay &&
           < CreateEvent
+            exitLogin = { this.exitLogin }
+          />
+        }
+
+        {
+          this.state.userProfileDisplay &&
+          < UserProfile
             exitLogin = { this.exitLogin }
           />
         }
