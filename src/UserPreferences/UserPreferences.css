@@ -9,7 +9,7 @@
 .drop-login-container {
   margin: auto;
   width: 300px;
-  height: 500px;
+  height: 460px;
   background: black;
   border: 3px solid #1086e8;
   border-radius: 10px;
@@ -27,7 +27,11 @@
     top: 95px; } }
 
 .drop-in-title {
-  font-size: 29px;
+
+  font-size: 32px;
+
+
+
   margin: 2px;
   margin-bottom: 4px;
   font-family: 'shindig';
