@@ -1,0 +1,15 @@
+[
+  {
+    "name":"Laura",
+    "email":"Laura@aol.com",
+    "authID":"abc123",
+    "photo":"https://www.whatever.com"
+  },
+
+  {
+    "name":"Jack",
+    "email":"Jack@gmail.com",
+    "authID":"2kool",
+    "photo":"https://www.whateverx2.com"
+  }
+]
