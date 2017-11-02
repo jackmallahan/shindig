@@ -26,20 +26,26 @@ class App extends Component {
   }
 
   storeUser = (displayName, uid, photoURL, email) => {
-    const user = Object.assign({}, { displayName, uid, photoURL, email })
-    console.log(user)
+    const user = Object.assign({}, {
+      name: displayName,
+      authID: uid,
+      user_id: null,
+      photo: photoURL,
+      email: email
+    })
 
-    fetch('/api/v1/users', {
+    fetch('http://localhost:3001/api/v1/users', {
       method: 'POST',
       body: JSON.stringify(user),
       headers: {
         'Accept': 'application/json, text/plain, */*',
+        'Access-Control-Allow-Origin': '*',
         'Content-Type': 'application/json'
       }
     })
-    .then(response => response.json())
     .then(response => { return response })
-    .then(response => console.log(response))
+    .then(response => response.json())
+    // .then(response => console.log(response))
     .catch(error => console.log(error))
   }
 
