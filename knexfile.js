@@ -14,7 +14,7 @@ module.exports = {
 
   test: {
   client: 'pg',
-  connection: process.env.DATABASE_URL || 'postgres://localhost/jetfueltest',
+  connection: process.env.DATABASE_URL || 'postgres://localhost/shindigtest',
   useNullAsDefault: true,
   migrations: {
     directory: './db/migrations'
