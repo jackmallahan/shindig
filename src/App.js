@@ -25,9 +25,33 @@ class App extends Component {
     }
   }
 
+  storeUser = (displayName, uid, photoURL, email) => {
+    const user = Object.assign({}, {
+      name: displayName,
+      authID: uid,
+      user_id: null,
+      photo: photoURL,
+      email: email
+    })
+
+    fetch('/api/v1/users', {
+      method: 'POST',
+      body: JSON.stringify({ user }),
+      headers: {
+        'Content-Type': 'application/json' }
+    })
+    .then(response => response.json())
+    .then(response => { return response } )
+    .catch(error => console.log({ error }));
+  }
+
+
   loginWithGoogle = () => {
     googleSignIn().then(user => {
       const { displayName, uid, photoURL, email } = user.user
+
+      this.storeUser(displayName, uid, photoURL, email);
+
       this.setState({
         userObj: { name: displayName, id: uid, avatar: photoURL, email: email },
         loginPageDisplay: false,
@@ -36,9 +60,13 @@ class App extends Component {
     })
   }
 
+
   loginWithFacebook = () => {
     facebookSignIn().then(user => {
       const { displayName, uid, photoURL, email } = user.user
+
+      this.storeUser(displayName, uid, photoURL, email);
+
       this.setState({
         userObj: { name: displayName, id: uid, avatar: photoURL, email: email },
         loginPageDisplay: false,
@@ -106,7 +134,7 @@ class App extends Component {
   }
 
   signOut = () => {
-    console.log('click');
+    // console.log('click');
     signOut();
     this.setState({
       userObj: {},
@@ -119,7 +147,7 @@ class App extends Component {
 
   render() {
 
-    console.log(this.state.userObj);
+    // console.log(this.state.userObj);
 
     return (
       <div className="App">
