@@ -34,19 +34,15 @@ class App extends Component {
       email: email
     })
 
-    fetch('http://localhost:3001/api/v1/users', {
+    fetch('/api/v1/users', {
       method: 'POST',
-      body: JSON.stringify(user),
+      body: JSON.stringify({ user }),
       headers: {
-        'Accept': 'application/json, text/plain, */*',
-        'Access-Control-Allow-Origin': '*',
-        'Content-Type': 'application/json'
-      }
+        'Content-Type': 'application/json' }
     })
-    .then(response => { return response })
     .then(response => response.json())
-    // .then(response => console.log(response))
-    .catch(error => console.log(error))
+    .then(response => { return response } )
+    .catch(error => console.log({ error }));
   }
 
 
