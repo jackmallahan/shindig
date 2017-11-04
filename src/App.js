@@ -29,7 +29,6 @@ class App extends Component {
     const user = Object.assign({}, {
       name: displayName,
       authID: uid,
-      user_id: null,
       photo: photoURL,
       email: email
     })

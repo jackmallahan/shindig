@@ -12,11 +12,12 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.set('port', process.env.PORT || 3000);
-app.locals.title = 'AmazonBay';
+app.locals.title = 'Shindig';
 
 app.listen(app.get('port'), () => {
   console.log(`${app.locals.title} is running on ${app.get('port')}.`);
 });
+
 
 
 //Endpoints
@@ -32,6 +33,17 @@ app.get('/api/v1/users', (request, response) => {
 });
 
 
+app.get('/api/v1/categories', (request, response) => {
+  database('categories').select()
+    .then(categories => {
+      if (!categories.length) {
+        return response.status(404).json({ error: 'Categories not found.' });
+      } return categories;
+    })
+    .then(categories => response.status(200).json(categories))
+    .catch(error => response.status(500).json({ error }));
+});
+
 
 app.post('/api/v1/users', (request, response) => {
   const users = request.body.user;
@@ -43,8 +55,29 @@ app.post('/api/v1/users', (request, response) => {
 
   database('users').insert(users, '*')
     .then(users => response.status(201).json(users))
-    .catch(error => response.status(500).json({ error }));
+    .catch(error => console.log(error));
 });
+
+    //Drop down the check-list for a user to make their preference selection -- this is ANOTHER post to joint table with user and user preferences
+
+
+
+app.post('/api/v1/joint_tables', (request, response) => {
+  const newPreference = request.body;
+
+  for (let userPreferences of [ 'categoryId', 'userId' ]) {
+    if (!newPreference[userPreferences]) {
+      return response.status(422).send({ error: `Expected parameters: { categoryId: <Integer>, userId: <Integer> }. You're missing a ${ userPreferences }.` })
+    }
+  }
+
+  database('joint_tables').insert(newPreference, '*')
+    .then(preference => response.status(201).json(preference))
+    .catch(error => response.status(500).json({ error }))
+});
+
+
+//TO EDIT PREFERENCES - DELETE USER/PREF LINK IN JOINT TABLE WHEN THAT LINK EXISTS IN THE JOINT TABLE AND A USER UNCHECKS THE BOX -- deleting from the table
 
 
 module.exports = app;
