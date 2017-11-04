@@ -21,6 +21,7 @@
     "pg": "^7.3.0",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
+    "react-google-maps": "^9.2.2",
     "react-router": "^4.2.0",
     "react-scripts": "1.0.14",
     "recompose": "^0.26.0"
