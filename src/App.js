@@ -8,6 +8,7 @@ import { googleSignIn, facebookSignIn, signOut } from './utils/firebase';
 import UserPreferences from './UserPreferences/UserPreferences.js';
 import CreateEvent from './CreateEvent/CreateEvent.js';
 import UserProfile from './userProfile/UserProfile.js';
+import Map from './GoogleMap/GoogleMap';
 import './App.css';
 
 class App extends Component {
@@ -21,7 +22,9 @@ class App extends Component {
       UserPreferencesDisplay: false,
       createEventDisplay: false,
       userProfileDisplay: false,
-      userObj: {}
+      userObj: {},
+      currentLat: null,
+      currentLong: null
     }
   }
 
@@ -134,7 +137,6 @@ class App extends Component {
   }
 
   signOut = () => {
-    // console.log('click');
     signOut();
     this.setState({
       userObj: {},
@@ -144,11 +146,22 @@ class App extends Component {
     this.exitLogin();
   }
 
+  getLocation = () => {
+    navigator.geolocation.getCurrentPosition(position => {
+      this.setState({
+        currentLat: position.coords.latitude,
+        currentLong: position.coords.longitude
+      });
+    });
+  }
+
+  componentDidMount() {
+    this.getLocation();
+    console.log(this.state.currentLocation);
+  }
 
   render() {
-
-    // console.log(this.state.userObj);
-
+    console.log('currentLocation', this.state.currentLocation);
     return (
       <div className="App">
 
@@ -170,9 +183,12 @@ class App extends Component {
 
         {
           this.state.headerDisplay &&
-          < Header
-            displayNavigation = { this.displayNavigation }
-          />
+          <div>
+            < Header
+              displayNavigation = { this.displayNavigation }
+            />
+            < Map currentLat = { this.state.currentLat } currentLong = { this.state.currentLong } />
+          </div>
         }
 
         {
