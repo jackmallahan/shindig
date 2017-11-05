@@ -8,7 +8,7 @@
     "start-js": "react-scripts start",
     "start": "npm-run-all -p watch-css start-js",
     "build": "npm run build-css && react-scripts build",
-    "test": "react-scripts test --env=jsdom",
+    "test": "NODE_ENV=test ./node_modules/.bin/mocha --exit",
     "eject": "react-scripts eject"
   },
   "dependencies": {
