@@ -510,7 +510,7 @@ h1 {
   width: 100%;
   position: absolute;
   top: 95px;
-  z-index: 101;
+  z-index: 99;
   animation-name: pref-drop-in-nav;
   animation-duration: 1s; }
 
@@ -526,7 +526,8 @@ h1 {
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-direction: column; }
+  flex-direction: column;
+  position: relative; }
 
 @keyframes pref-drop-in-nav {
   0% {
@@ -536,8 +537,8 @@ h1 {
 
 .drop-in-title {
   font-size: 32px;
-  margin: 2px;
-  margin-bottom: 4px;
+  position: absolute;
+  top: 5px;
   font-family: 'shindig';
   color: #FF00E6;
   animation: flicker3 6s linear infinite; }
@@ -547,7 +548,8 @@ h1 {
 
 .prefernces-list {
   height: 260px;
-  overflow: scroll; }
+  overflow: scroll;
+  margin-top: 42px; }
 
 .checkbox-container {
   display: flex;
@@ -577,21 +579,37 @@ input:checked ~ label {
   font-family: 'goodTimes';
   color: #FF00E6;
   width: 245px;
-  height: 28px;
+  height: 24px;
   margin-top: 16px;
   border: 3px solid #1086e8;
   border-radius: 20px;
   padding-left: 10px;
   box-shadow: 0px 0px 25px 2px #1086e8; }
 
+.event-description {
+  font-size: 14px;
+  font-family: 'goodTimes';
+  color: #FF00E6;
+  width: 245px;
+  height: 60px;
+  margin-top: 16px;
+  border: 3px solid #1086e8;
+  border-radius: 20px;
+  padding-left: 10px;
+  padding-top: 5px;
+  box-shadow: 0px 0px 25px 2px #1086e8; }
+  .event-description:focus {
+    outline: none; }
+
 .event-input:focus {
   outline: none; }
 
 .error-message {
-  font-size: 14px;
+  font-size: 10px;
   font-family: 'goodTimes';
   color: #FF00E6;
-  text-align: center; }
+  text-align: center;
+  margin-top: 35px; }
 
 .user-name {
   font-size: 11px;

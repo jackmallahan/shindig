@@ -4,7 +4,7 @@
   font-family: 'goodTimes';
   color: #FF00E6;
   width: 245px;
-  height: 28px;
+  height: 24px;
   margin-top: 16px;
   border: 3px solid #1086e8;
   border-radius: 20px;
@@ -12,13 +12,31 @@
   box-shadow: 0px 0px 25px 2px #1086e8;
 }
 
+.event-description  {
+  font-size: 14px;
+  font-family: 'goodTimes';
+  color: #FF00E6;
+  width: 245px;
+  height: 60px;
+  margin-top: 16px;
+  border: 3px solid #1086e8;
+  border-radius: 20px;
+  padding-left: 10px;
+  padding-top: 5px;
+  box-shadow: 0px 0px 25px 2px #1086e8;
+  &:focus {
+    outline: none;
+  }
+}
+
 .event-input:focus  {
   outline: none;
 }
 
 .error-message  {
-  font-size: 14px;
+  font-size: 10px;
   font-family: 'goodTimes';
   color: #FF00E6;
   text-align: center;
+  margin-top: 35px;
 }
