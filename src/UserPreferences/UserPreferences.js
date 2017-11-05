@@ -18,7 +18,7 @@ class UserPreferences extends Component {
       }
     })
 
-    this.props.userPreferences(this.preferences);
+    this.props.userPreferences(this.props.userId, this.preferences);
 
     this.props.exitLogin()
   }
