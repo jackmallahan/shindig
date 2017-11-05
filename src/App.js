@@ -50,38 +50,26 @@ class App extends Component {
 
 
   storePreferences = (uid, categoryid) => {
-    const userPreferences = Object.assign({}, {
-      userId: uid,
-      categoryId: categoryid
-    })
-
     fetch('/api/v1/joint_tables', {
       method: 'POST',
-      body: JSON.stringify({ userPreferences }),
+      body: JSON.stringify({ userId: uid, categoryId: categoryid }),
       headers: {
         'Content-Type': 'application/json' }
     })
     .then(response => response.json())
+    .then(response => console.log(response))
     .then(response => { return response } )
     .catch(error => console.log({ error }));
   }
 
   myPreferences = (uid, preferencesId) => {
-    // const uid = this.state.userObj.id
-
     preferencesId.forEach(id => {
-      console.log(uid, id)
+      this.storePreferences(uid, id)
     })
    }
 
 
   loginWithGoogle = () => {
-    //On login, when the dropdown falls and a user checks a box, check the value of the box (this is the ID living in the DB), and push that ID into the array
-    //then, loop through that array to grab each ID and POST it into joint_tables
-
-    // this.storePreferences(id, this.postPreferences.forEach(prefId => { return prefId }))
-          //ISSUES -- this needs to live on the 'Update Preferences button, NOT on log-in', however, we need to grab the user ID on log-in
-
     googleSignIn().then(user => {
       const { id, displayName, uid, photoURL, email } = user.user
 
