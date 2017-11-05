@@ -566,7 +566,8 @@ h1 {
 
 label:hover {
   cursor: pointer;
-  text-shadow: 2px 2px 5px #1086e8; }
+  text-shadow: 1px 1px 3px #FF00E6;
+  color: #1086e8; }
 
 input:checked ~ label {
   color: #1086e8; }
@@ -576,7 +577,7 @@ input:checked ~ label {
   font-family: 'goodTimes';
   color: #FF00E6;
   width: 245px;
-  height: 36px;
+  height: 28px;
   margin-top: 16px;
   border: 3px solid #1086e8;
   border-radius: 20px;
