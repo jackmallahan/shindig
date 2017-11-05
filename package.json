@@ -26,7 +26,11 @@
   },
   "description": "This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).",
   "main": "index.js",
-  "devDependencies": {},
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "chai-http": "^3.0.0",
+    "mocha": "^4.0.1"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/jackmallahan/shindig.git"
