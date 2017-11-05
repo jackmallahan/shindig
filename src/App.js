@@ -9,7 +9,7 @@ import UserPreferences from './UserPreferences/UserPreferences.js';
 import CreateEvent from './CreateEvent/CreateEvent.js';
 import UserProfile from './userProfile/UserProfile.js';
 import Map from './GoogleMap/GoogleMap';
-import fetchEvents from './helpers/fetchEvents'
+import fetchEvents from './helpers/fetchEvents';
 import './App.css';
 
 class App extends Component {
@@ -135,18 +135,21 @@ class App extends Component {
 
   userPreferences = () => {
   this.setState({
+    navigationDisplay: false,
     UserPreferencesDisplay: true
     });
   }
 
   createEvent = () => {
   this.setState({
+    navigationDisplay: false,
     createEventDisplay: true
     });
   }
 
   userProfile = () => {
   this.setState({
+    navigationDisplay: false,
     userProfileDisplay: true
     });
   }
