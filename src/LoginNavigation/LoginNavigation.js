@@ -1,5 +1,4 @@
 import React from 'react';
-import introMusic from '../assets/05-Electric-Worm.m4a';
 
 const LoginNavigation = ( { skipLogin, emailLogin, loginWithGoogle, loginWithFacebook } ) => {
     return (
