@@ -189,7 +189,7 @@ class App extends Component {
       });
     });
   }
-  
+
   componentDidMount() {
       this.getLocation();
       console.log(this.state.currentLocation);
@@ -198,7 +198,7 @@ class App extends Component {
 
   render() {
     console.log('currentLocation', this.state.currentLocation);
-   
+
     return (
       <div className="App">
 

@@ -7,17 +7,19 @@ const MyMapComponent = compose(
     googleMapURL: "https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places",
     loadingElement: <div style={{ height: `100%` }} />,
     containerElement: <div style={{ height: `400px` }} />,
-    mapElement: <div style={{ height: `100%` }} />,
+    mapElement: <div style={{ height: `100%` }} />
   }),
   withScriptjs,
   withGoogleMap
-)((props) =>
-  <GoogleMap
-    defaultZoom={14}
-    defaultCenter={{ lat: 39.7508, lng: -104.9966 }}
+)((props) => {
+  console.log('props', props)
+  return <GoogleMap
+  defaultZoom={14}
+  defaultCenter={{ lat: props.currentLat, lng: props.currentLong }}
   >
-    {props.isMarkerShown && <Marker position={{ lat: 39.7508, lng: -104.9966 }} onClick={props.onMarkerClick} />}
+  {props.isMarkerShown && <Marker position={{ lat: 39.7508, lng: -104.9966 }} onClick={props.onMarkerClick} />}
   </GoogleMap>
+}
 )
 
 class Map extends Component {
