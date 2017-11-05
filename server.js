@@ -58,9 +58,6 @@ app.post('/api/v1/users', (request, response) => {
     .catch(error => console.log(error));
 });
 
-    //Drop down the check-list for a user to make their preference selection -- this is ANOTHER post to joint table with user and user preferences
-
-
 
 app.post('/api/v1/joint_tables', (request, response) => {
   const newPreference = request.body;

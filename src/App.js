@@ -21,8 +21,9 @@ class App extends Component {
       UserPreferencesDisplay: false,
       createEventDisplay: false,
       userProfileDisplay: false,
-      userObj: {}
+      userObj: {},
     }
+    this.postPreferences = []
   }
 
   storeUser = (displayName, uid, photoURL, email) => {
@@ -45,16 +46,49 @@ class App extends Component {
   }
 
 
+  storePreferences = (uid, categoryid) => {
+    const userPreferences = Object.assign({}, {
+      userId: uid,
+      categoryId: categoryid
+    })
+
+    fetch('/api/v1/joint_tables', {
+      method: 'POST',
+      body: JSON.stringify({ userPreferences }),
+      headers: {
+        'Content-Type': 'application/json' }
+    })
+    .then(response => response.json())
+    .then(response => { return response } )
+    .catch(error => console.log({ error }));
+  }
+
+  myPreferences = (preferencesId) => {
+    preferencesId.forEach(id => {
+      this.postPreferences.push(id)
+      console.log(id)
+    })
+   }
+
+
   loginWithGoogle = () => {
+    //On login, when the dropdown falls and a user checks a box, check the value of the box (this is the ID living in the DB), and push that ID into the array
+    //then, loop through that array to grab each ID and POST it into joint_tables
+
+    // this.storePreferences(id, this.postPreferences.forEach(prefId => { return prefId }))
+          //ISSUES -- this needs to live on the 'Update Preferences button, NOT on log-in', however, we need to grab the user ID on log-in
+
     googleSignIn().then(user => {
-      const { displayName, uid, photoURL, email } = user.user
+      const { id, displayName, uid, photoURL, email } = user.user
+
 
       this.storeUser(displayName, uid, photoURL, email);
 
       this.setState({
         userObj: { name: displayName, id: uid, avatar: photoURL, email: email },
         loginPageDisplay: false,
-        headerDisplay: true
+        headerDisplay: true,
+        UserPreferencesDisplay: true
       })
     })
   }
@@ -69,7 +103,9 @@ class App extends Component {
       this.setState({
         userObj: { name: displayName, id: uid, avatar: photoURL, email: email },
         loginPageDisplay: false,
-        headerDisplay: true}
+        headerDisplay: true,
+        UserPreferencesDisplay: true
+      }
       )
     })
   }
@@ -133,7 +169,6 @@ class App extends Component {
   }
 
   signOut = () => {
-    // console.log('click');
     signOut();
     this.setState({
       userObj: {},
@@ -145,8 +180,6 @@ class App extends Component {
 
 
   render() {
-
-    // console.log(this.state.userObj);
 
     return (
       <div className="App">
@@ -190,6 +223,7 @@ class App extends Component {
           this.state.UserPreferencesDisplay &&
           < UserPreferences
             exitLogin = { this.exitLogin }
+            userPreferences={ this.myPreferences }
           />
         }
 
