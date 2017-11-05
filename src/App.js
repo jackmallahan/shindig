@@ -9,6 +9,7 @@ import UserPreferences from './UserPreferences/UserPreferences.js';
 import CreateEvent from './CreateEvent/CreateEvent.js';
 import UserProfile from './userProfile/UserProfile.js';
 import Map from './GoogleMap/GoogleMap';
+import fetchEvents from './helpers/fetchEvents'
 import './App.css';
 
 class App extends Component {
@@ -191,9 +192,10 @@ class App extends Component {
   }
 
   componentDidMount() {
-      this.getLocation();
-      console.log(this.state.currentLocation);
-    }
+    console.log('CDM');
+    fetchEvents('10mi', 39.7508, 104.9966)
+    this.getLocation();
+  }
 
 
   render() {
