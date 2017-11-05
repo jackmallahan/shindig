@@ -44,7 +44,6 @@ app.get('/api/v1/categories', (request, response) => {
     .catch(error => response.status(500).json({ error }));
 });
 
-
 app.post('/api/v1/users', (request, response) => {
   const users = request.body.user;
 
