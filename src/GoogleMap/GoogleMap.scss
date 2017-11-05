@@ -1,0 +1,25 @@
+.map-container  {
+  width: 300px;
+  height: 400px;
+  position: relative;
+  top: 100px;
+  margin: auto;
+  border-radius: 10px;
+  border:3px solid #1086e8;
+  box-shadow: 0px 0px 36px 2px #1086e8;
+  overflow: hidden;
+  animation-name: map-drop;
+  animation-duration: 1s;
+}
+
+@keyframes map-drop {
+	0% { top: -500px; }
+	100% { top: 100px; }
+}
+
+.map  {
+  width: 300px;
+  height: 400px;
+  position: absolute;
+  z-index: 1;
+}
