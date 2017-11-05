@@ -24,7 +24,7 @@ class App extends Component {
       userProfileDisplay: false,
       userObj: {},
       currentLat: null,
-      currentLong: null,
+      currentLong: null
     }
     this.postPreferences = []
   }
@@ -189,15 +189,16 @@ class App extends Component {
       });
     });
   }
-
+  
   componentDidMount() {
-    this.getLocation();
-    console.log(this.state.currentLocation);
-  }
+      this.getLocation();
+      console.log(this.state.currentLocation);
+    }
+
 
   render() {
     console.log('currentLocation', this.state.currentLocation);
-
+   
     return (
       <div className="App">
 
