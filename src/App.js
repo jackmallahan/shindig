@@ -27,7 +27,6 @@ class App extends Component {
       currentLat: null,
       currentLong: null
     }
-    this.postPreferences = []
   }
 
   storeUser = (displayName, uid, photoURL, email) => {
@@ -67,10 +66,11 @@ class App extends Component {
     .catch(error => console.log({ error }));
   }
 
-  myPreferences = (preferencesId) => {
+  myPreferences = (uid, preferencesId) => {
+    // const uid = this.state.userObj.id
+
     preferencesId.forEach(id => {
-      this.postPreferences.push(id)
-      console.log(id)
+      console.log(uid, id)
     })
    }
 
@@ -247,6 +247,7 @@ class App extends Component {
           < UserPreferences
             exitLogin = { this.exitLogin }
             userPreferences={ this.myPreferences }
+            userId = { this.state.userObj.id }
           />
         }
 
