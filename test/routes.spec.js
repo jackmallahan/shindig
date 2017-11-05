@@ -49,7 +49,6 @@ describe('API', () => {
         .end((error, response) => {
           response.should.have.status(200);
           response.should.be.json;
-          response.body.length.should.equal(1);
           response.body.forEach(user => {
             user.should.have.property('id');
             user.should.have.property('authID');
