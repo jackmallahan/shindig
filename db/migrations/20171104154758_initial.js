@@ -11,13 +11,21 @@ exports.up = function(knex, Promise) {
 
     knex.schema.createTable('users', function(table) {
       table.increments('id').primary();
+      table.string('authID').unique();
       table.string('name');
       table.string('email');
-      table.integer('user_id').unsigned()
-      table.foreign('user_id').references('categories.id');
+      table.string('photo');
 
       table.timestamps(true, true);
-    })
+    }),
+
+    knex.schema.createTable('joint_tables', function(table) {
+      table.increments('id').primary();
+      table.integer('categoryId').unsigned().references('id').inTable('categories');
+      table.integer('userId').unsigned().references('id').inTable('users');
+
+      table.timestamps(true, true);
+    }),
   ])
 };
 
@@ -25,6 +33,7 @@ exports.up = function(knex, Promise) {
 exports.down = function(knex, Promise) {
   return Promise.all([
     knex.schema.dropTable('categories'),
-    knex.schema.dropTable('users')
+    knex.schema.dropTable('users'),
+    knex.schema.dropTable('joint_tables')
   ]);
 };
