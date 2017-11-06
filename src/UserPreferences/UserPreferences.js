@@ -8,27 +8,41 @@ class UserPreferences extends Component {
     this.preferences = []
   }
 
-  //Retrieve specific user preferences from joint_tables DB to display whenever this component renders, if that user exists
   fetchUserData = (userId) => {
-    fetch('/api/v1/joint_tables/userId')
+    fetch(`/api/v1/joint_tables/${userId}`)
       .then(response => response.json())
       .then(response => { return response })
+      // .then(response => showUserPreferences(response))
   }
-  //Need to do something with this retrieval above
+
+  // showUserPreferences = (response) => {
+  //   PLACE.append(`
+  //     <article>
+  //       <ul>
+  //         <li>${response.}</li>
+  //       </ul>
+  //     </article>
+  //   `)
+  // }
+
+  //FN to check user and then if they exist, skip render userpref component, instead fetch preferences and append those preferences to the page
 
   selectedEvents = () => {
     this.preferences = []
     const events = document.querySelectorAll('.checkbox')
     events.forEach((event) => {
       if(event.checked === true) {
+        let eventName = event.name
         let eventId = parseInt(event.value)
-        this.preferences.push(eventId)
+        this.preferences.push({eventId: eventId, eventName: eventName})
       }
     })
 
-    this.props.userPreferences(this.props.userId, this.preferences);
+    this.preferences.forEach(preference => {
+      this.props.storePreferences(this.props.userId, preference.eventId, preference.eventName)
+    })
 
-    this.fetchUserData(this.props.userId)
+    // this.fetchUserData(this.props.userId)
 
     this.props.exitLogin()
   }

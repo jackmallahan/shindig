@@ -55,10 +55,10 @@ class App extends Component {
       .catch(error => console.log({ error }));
   };
 
-  storePreferences = (uid, categoryid) => {
+  storePreferences = (uid, categoryid, name) => {
     fetch('/api/v1/joint_tables', {
       method: 'POST',
-      body: JSON.stringify({ userId: uid, categoryId: categoryid }),
+      body: JSON.stringify({ userId: uid, categoryId: categoryid, prefName: name }),
       headers: {
         'Content-Type': 'application/json',
       },
@@ -69,12 +69,6 @@ class App extends Component {
       })
       .catch(error => console.log({ error }));
   };
-
-  myPreferences = (uid, preferencesId) => {
-    preferencesId.forEach(id => {
-      this.storePreferences(uid, id)
-    })
-   }
 
   loginWithGoogle = () => {
     googleSignIn().then(user => {
@@ -197,7 +191,6 @@ class App extends Component {
   }
 
   render() {
-    // console.log('currentLocation', this.state.currentLocation);
 
     return (
       <div className="App">
@@ -239,7 +232,7 @@ class App extends Component {
         {this.state.UserPreferencesDisplay && (
           <UserPreferences
             exitLogin={this.exitLogin}
-            userPreferences={this.myPreferences}
+            storePreferences={this.storePreferences}
             userId={this.state.userObj.id}
           />
         )}
