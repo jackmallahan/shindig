@@ -78,9 +78,9 @@ class App extends Component {
 
   myPreferences = (uid, preferencesId) => {
     preferencesId.forEach(id => {
-      console.log(uid, id);
-    });
-  };
+      this.storePreferences(uid, id)
+    })
+   }
 
   loginWithGoogle = () => {
     //On login, when the dropdown falls and a user checks a box, check the value of the box (this is the ID living in the DB), and push that ID into the array
