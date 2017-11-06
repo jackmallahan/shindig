@@ -9,7 +9,6 @@ import UserPreferences from './UserPreferences/UserPreferences.js';
 import CreateEvent from './CreateEvent/CreateEvent.js';
 import UserProfile from './userProfile/UserProfile.js';
 import Map from './GoogleMap/GoogleMap';
-import fetchEvents from './helpers/fetchEvents'
 import './App.css';
 
 class App extends Component {
@@ -25,7 +24,8 @@ class App extends Component {
       userProfileDisplay: false,
       userObj: {},
       currentLat: null,
-      currentLong: null
+      currentLong: null,
+      userEvents: []
     }
   }
 
@@ -191,9 +191,15 @@ class App extends Component {
     });
   }
 
+  fetchEvents = (locationWithin, lat, long) => {
+    fetch(`https://www.eventbriteapi.com/v3/events/search/?sort_by=distance&location.within=${locationWithin}&location.latitude=${lat}&location.longitude=-${long}&start_date.keyword=today&token=FSMFIMMKBZMU5HR6LYN2`)
+      .then(data => data.json())
+      .then(data => this.setState({ userEvents: data.events }))
+  }
+
   componentDidMount() {
     console.log('CDM');
-    fetchEvents('10mi', 39.7508, 104.9966)
+    this.fetchEvents('1mi', 39.7508, 104.9966)
     this.getLocation();
   }
 
@@ -226,7 +232,7 @@ class App extends Component {
             < Header
               displayNavigation = { this.displayNavigation }
             />
-            < Map currentLat = { this.state.currentLat } currentLong = { this.state.currentLong } />
+            < Map currentLat = { this.state.currentLat } currentLong = { this.state.currentLong } userEvents = { this.state.userEvents }/>
           </div>
         }
 

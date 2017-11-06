@@ -12,37 +12,36 @@ const MyMapComponent = compose(
   withScriptjs,
   withGoogleMap
 )((props) => {
-  console.log('props', props)
+  let markerDisplay = props.markerArray.forEach(marker =>
+    <Marker position={{ lat: marker.lat, lng: marker.long }} onClick={props.onMarkerClick} />
+  )
   return <GoogleMap
-  defaultZoom={14}
+  defaultZoom={8}
   defaultCenter={{ lat: props.currentLat, lng: props.currentLong }}
   >
-  {props.isMarkerShown && <Marker position={{ lat: 39.7508, lng: -104.9966 }} onClick={props.onMarkerClick} />}
+  { props.isMarkerShown && markerDisplay}
   </GoogleMap>
-}
-)
+})
 
 class Map extends Component {
-  state = {
-    isMarkerShown: true,
+  constructor(){
+    super();
+    this.state = {
+      isMarkerShown: true,
+      markerArray: []
+    }
   }
 
   componentDidMount() {
-    this.delayedShowMarker()
-  }
-
-  delayedShowMarker = () => {
-    setTimeout(() => {
-      this.setState({ isMarkerShown: true })
-    }, 3000)
-  }
-
-  handleMarkerClick = () => {
-    this.setState({ isMarkerShown: false })
-    this.delayedShowMarker()
+    this.props.userEvents.forEach(event => {
+      fetch(`https://www.eventbriteapi.com/v3/venues/${event.venue_id}/?token=FSMFIMMKBZMU5HR6LYN2`)
+        .then(venue => venue.json())
+        .then(venue => this.setState({ markerArray: [...this.state.markerArray, {lat: venue.latitude, long: venue.longitude}] }));
+    })
   }
 
   render() {
+    console.log(this.state);
     return (
       <div className='map-container'>
         <MyMapComponent
@@ -50,6 +49,7 @@ class Map extends Component {
           currentLong={this.props.currentLong}
           isMarkerShown={this.state.isMarkerShown}
           onMarkerClick={this.handleMarkerClick}
+          markerArray={this.state.markerArray}
         />
       </div>
     )
