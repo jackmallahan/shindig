@@ -29,7 +29,6 @@
 }
 
 .drop-in-title  {
-
   font-size: 32px;
   position: absolute;
   top: 5px;
@@ -38,6 +37,18 @@
   font-family: 'shindig';
   color: #FF00E6;
   animation: flicker3 6s linear infinite;
+}
+
+.user-title {
+  left: 68px;
+}
+
+.pref-title {
+  left: 42px;
+}
+
+.create-title  {
+  left: 70px;
 }
 
 .preferences-container  {

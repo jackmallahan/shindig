@@ -34,7 +34,7 @@ class CreateEvent extends Component {
     return (
       <div className='outer-drop-container'>
         <div className='drop-login-container'>
-          <p className='drop-in-title'>Create Event</p>
+          <p className='drop-in-title create-title'>Create Event</p>
 
           { this.state.invalidEvent && <div className='error-message'><p>INVALID:</p><p>Complete All Fields</p></div>}
 

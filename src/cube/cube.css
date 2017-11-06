@@ -22,7 +22,8 @@
   background-repeat: no-repeat;
   background-size: contain;
   position: absolute;
-  top: -307px; }
+  top: -307px;
+  left: 134px; }
 
 /* The Cube */
 .cube-wrap {
