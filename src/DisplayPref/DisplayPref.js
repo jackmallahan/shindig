@@ -8,21 +8,9 @@ const DisplayPref = ( { userPreferences }) => {
         <div className='drop-display-pref-container'>
           <p className='display-pref-title'>Your Preferences</p>
           <div className='pref-container'>
-            <p>test</p>
-            <p>test</p>
-            <p>test</p>
-            <p>test</p>
-            <p>test</p>
-            <p>test</p>
-            <p>test</p>
-            <p>test</p>
-            <p>test</p>
-            <p>test</p>
-            <p>test</p>
-
+      
           </div>
           <button className='nav-btn' onClick={ userPreferences } >Update Preferences </button>
-
         </div>
       </div>
     </div>
