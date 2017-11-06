@@ -2,7 +2,7 @@
 .outer-cube-container {
   position: absolute;
   width: 100%;
-  top: 100px;
+  top: 60px;
   z-index: 100;
   animation-name: drop-in;
   animation-duration: 3s; }

@@ -8,13 +8,13 @@
   0% {
     top: -300px; }
   100% {
-    top: 100px; } }
+    top: 60px; } }
 
 @keyframes rise {
   0% {
     padding-top: 1400px; }
   100% {
-    padding-top: 293px; } }
+    padding-top: 230px; } }
 
 @keyframes border-flicker2 {
   0% {

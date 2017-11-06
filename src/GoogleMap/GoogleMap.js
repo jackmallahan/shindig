@@ -57,14 +57,16 @@ class Map extends Component {
   render() {
     console.log(this.state);
     return (
-      <div className="map-container">
-        <MyMapComponent
-          currentLat={this.props.currentLat}
-          currentLong={this.props.currentLong}
-          isMarkerShown={this.state.isMarkerShown}
-          onMarkerClick={this.handleMarkerClick}
-          markerArray={this.state.markerArray}
-        />
+      <div className='backdrop'>
+        <div className="map-container">
+          <MyMapComponent
+            currentLat={this.props.currentLat}
+            currentLong={this.props.currentLong}
+            isMarkerShown={this.state.isMarkerShown}
+            onMarkerClick={this.handleMarkerClick}
+            markerArray={this.state.markerArray}
+          />
+        </div>
       </div>
     );
   }
