@@ -1,4 +1,5 @@
 const express = require('express');
+
 const app = express();
 const path = require('path');
 const bodyParser = require('body-parser');
@@ -18,27 +19,28 @@ app.listen(app.get('port'), () => {
   console.log(`${app.locals.title} is running on ${app.get('port')}.`);
 });
 
-
-
-//Endpoints
+// Endpoints
 app.get('/api/v1/users', (request, response) => {
-  database('users').select()
-    .then(users => {
+  database('users')
+    .select()
+    .then((users) => {
       if (!users.length) {
         return response.status(404).json({ error: 'Users not found.' });
-      } return users;
+      }
+      return users;
     })
     .then(users => response.status(200).json(users))
     .catch(error => response.status(500).json({ error }));
 });
 
-
 app.get('/api/v1/categories', (request, response) => {
-  database('categories').select()
-    .then(categories => {
+  database('categories')
+    .select()
+    .then((categories) => {
       if (!categories.length) {
         return response.status(404).json({ error: 'Categories not found.' });
-      } return categories;
+      }
+      return categories;
     })
     .then(categories => response.status(200).json(categories))
     .catch(error => response.status(500).json({ error }));
@@ -48,20 +50,19 @@ app.post('/api/v1/users', (request, response) => {
   const users = request.body.user;
 
   if (!users.name || !users.authID || !users.photo || !users.email) {
-    return response.status(422).send({ error: 'Your users is missing a required property.'
+    return response.status(422).send({
+      error: 'Your user is missing a required property.',
     });
   }
 
-  database('users').insert(users, '*')
+  database('users')
+    .insert(users, '*')
     .then(users => response.status(201).json(users))
     .catch(error => console.log(error));
 });
 
-
 app.post('/api/v1/joint_tables', (request, response) => {
   const newPreference = request.body;
-
-  console.log(newPreference.userId, newPreference.categoryId)
 
   // for (let userPreferences of [ 'categoryId', 'userId' ]) {
   //   if (!newPreference[userPreferences]) {
@@ -74,8 +75,6 @@ app.post('/api/v1/joint_tables', (request, response) => {
     .catch(error => response.status(500).json({ error }))
 });
 
-
-//TO EDIT PREFERENCES - DELETE USER/PREF LINK IN JOINT TABLE WHEN THAT LINK EXISTS IN THE JOINT TABLE AND A USER UNCHECKS THE BOX -- deleting from the table
-
+// TO EDIT PREFERENCES - DELETE USER/PREF LINK IN JOINT TABLE WHEN THAT LINK EXISTS IN THE JOINT TABLE AND A USER UNCHECKS THE BOX -- deleting from the table
 
 module.exports = app;

@@ -9,7 +9,6 @@ import UserPreferences from './UserPreferences/UserPreferences.js';
 import CreateEvent from './CreateEvent/CreateEvent.js';
 import UserProfile from './userProfile/UserProfile.js';
 import Map from './GoogleMap/GoogleMap';
-import fetchEvents from './helpers/fetchEvents';
 import './App.css';
 
 class App extends Component {
@@ -25,42 +24,57 @@ class App extends Component {
       userProfileDisplay: false,
       userObj: {},
       currentLat: null,
-      currentLong: null
-    }
+      currentLong: null,
+      userEvents: [],
+    };
   }
 
   storeUser = (displayName, uid, photoURL, email) => {
-    const user = Object.assign({}, {
-      name: displayName,
-      authID: uid,
-      photo: photoURL,
-      email: email
-    })
+    const user = Object.assign(
+      {},
+      {
+        name: displayName,
+        authID: uid,
+        photo: photoURL,
+        email: email,
+      },
+    );
 
     fetch('/api/v1/users', {
       method: 'POST',
       body: JSON.stringify({ user }),
       headers: {
-        'Content-Type': 'application/json' }
+        'Content-Type': 'application/json',
+      },
     })
-    .then(response => response.json())
-    .then(response => { return response } )
-    .catch(error => console.log({ error }));
-  }
-
+      .then(response => response.json())
+      .then(response => {
+        return response;
+      })
+      .catch(error => console.log({ error }));
+  };
 
   storePreferences = (uid, categoryid) => {
+    const userPreferences = Object.assign(
+      {},
+      {
+        userId: uid,
+        categoryId: categoryid,
+      },
+    );
     fetch('/api/v1/joint_tables', {
       method: 'POST',
       body: JSON.stringify({ userId: uid, categoryId: categoryid }),
       headers: {
-        'Content-Type': 'application/json' }
+        'Content-Type': 'application/json',
+      },
     })
-    .then(response => response.json())
-    .then(response => console.log(response))
-    .then(response => { return response } )
-    .catch(error => console.log({ error }));
-  }
+      .then(response => response.json())
+      .then(response => {
+        return response;
+      })
+      .catch(error => console.log({ error }));
+  };
 
   myPreferences = (uid, preferencesId) => {
     preferencesId.forEach(id => {
@@ -68,11 +82,14 @@ class App extends Component {
     })
    }
 
-
   loginWithGoogle = () => {
-    googleSignIn().then(user => {
-      const { id, displayName, uid, photoURL, email } = user.user
+    //On login, when the dropdown falls and a user checks a box, check the value of the box (this is the ID living in the DB), and push that ID into the array
+    //then, loop through that array to grab each ID and POST it into joint_tables
 
+    // this.storePreferences(id, this.postPreferences.forEach(prefId => { return prefId }))
+    //ISSUES -- this needs to live on the 'Update Preferences button, NOT on log-in', however, we need to grab the user ID on log-in
+    googleSignIn().then(user => {
+      const { id, displayName, uid, photoURL, email } = user.user;
 
       this.storeUser(displayName, uid, photoURL, email);
 
@@ -80,15 +97,14 @@ class App extends Component {
         userObj: { name: displayName, id: uid, avatar: photoURL, email: email },
         loginPageDisplay: false,
         headerDisplay: true,
-        UserPreferencesDisplay: true
-      })
-    })
-  }
-
+        UserPreferencesDisplay: true,
+      });
+    });
+  };
 
   loginWithFacebook = () => {
     facebookSignIn().then(user => {
-      const { displayName, uid, photoURL, email } = user.user
+      const { displayName, uid, photoURL, email } = user.user;
 
       this.storeUser(displayName, uid, photoURL, email);
 
@@ -96,171 +112,158 @@ class App extends Component {
         userObj: { name: displayName, id: uid, avatar: photoURL, email: email },
         loginPageDisplay: false,
         headerDisplay: true,
-        UserPreferencesDisplay: true
-      }
-      )
-    })
-  }
+        UserPreferencesDisplay: true,
+      });
+    });
+  };
 
   skipLogin = () => {
     this.setState({
       loginPageDisplay: false,
-      headerDisplay: true
-      });
-    }
+      headerDisplay: true,
+    });
+  };
 
   displayNavigation = () => {
-    if(this.state.navigationDisplay === false ) {
+    if (this.state.navigationDisplay === false) {
       this.setState({
-        navigationDisplay: true
-        });
+        navigationDisplay: true,
+      });
     } else {
       this.setState({
-        navigationDisplay: false
+        navigationDisplay: false,
       });
     }
-  }
+  };
 
   userPreferences = () => {
-  this.setState({
-    navigationDisplay: false,
-    UserPreferencesDisplay: true
+    this.setState({
+      UserPreferencesDisplay: true,
     });
-  }
+  };
 
   createEvent = () => {
-  this.setState({
-    navigationDisplay: false,
-    createEventDisplay: true
+    this.setState({
+      createEventDisplay: true,
     });
-  }
+  };
 
   userProfile = () => {
-  this.setState({
-    navigationDisplay: false,
-    userProfileDisplay: true
+    this.setState({
+      userProfileDisplay: true,
     });
-  }
+  };
 
   exitLogin = () => {
-  this.setState({
-    navigationDisplay: false,
-    UserPreferencesDisplay: false,
-    createEventDisplay: false,
-    userProfileDisplay: false
+    this.setState({
+      navigationDisplay: false,
+      UserPreferencesDisplay: false,
+      createEventDisplay: false,
+      userProfileDisplay: false,
     });
-  }
+  };
 
   login = () => {
-  this.setState({
-    loginPageDisplay: true,
-    headerDisplay: false,
-    navigationDisplay: false,
-    EmailLoginDisplay: false,
-    UserPreferencesDisplay: false,
-    createEventDisplay: false,
-    userProfileDisplay: false,
+    this.setState({
+      loginPageDisplay: true,
+      headerDisplay: false,
+      navigationDisplay: false,
+      EmailLoginDisplay: false,
+      UserPreferencesDisplay: false,
+      createEventDisplay: false,
+      userProfileDisplay: false,
     });
-  }
+  };
 
   signOut = () => {
     signOut();
     this.setState({
       userObj: {},
       loginPageDisplay: true,
-      headerDisplay: false
-    })
+      headerDisplay: false,
+    });
     this.exitLogin();
-  }
+  };
 
   getLocation = () => {
     navigator.geolocation.getCurrentPosition(position => {
       this.setState({
         currentLat: position.coords.latitude,
-        currentLong: position.coords.longitude
+        currentLong: position.coords.longitude,
       });
     });
-  }
+  };
+
+  fetchEvents = (locationWithin, lat, long) => {
+    fetch(
+      `https://www.eventbriteapi.com/v3/events/search/?sort_by=distance&location.within=${locationWithin}&location.latitude=${lat}&location.longitude=-${long}&start_date.keyword=today&token=FSMFIMMKBZMU5HR6LYN2`,
+    )
+      .then(data => data.json())
+      .then(data => this.setState({ userEvents: data.events }));
+  };
 
   componentDidMount() {
     console.log('CDM');
-    fetchEvents('10mi', 39.7508, 104.9966)
+    this.fetchEvents('1mi', 39.7508, 104.9966);
     this.getLocation();
   }
-
 
   render() {
     console.log('currentLocation', this.state.currentLocation);
 
     return (
       <div className="App">
+        <Background exitLogin={this.exitLogin} />
 
-        < Background
-          exitLogin = { this.exitLogin }
-        />
-
-        {
-          this.state.loginPageDisplay &&
+        {this.state.loginPageDisplay && (
           <div>
-            < Cube />
+            <Cube />
             <LoginNavigation
-              skipLogin = { this.skipLogin }
-              loginWithGoogle = { this.loginWithGoogle }
-              loginWithFacebook = { this.loginWithFacebook }
-              />
-          </div>
-        }
-
-        {
-          this.state.headerDisplay &&
-          <div>
-            < Header
-              displayNavigation = { this.displayNavigation }
+              skipLogin={this.skipLogin}
+              loginWithGoogle={this.loginWithGoogle}
+              loginWithFacebook={this.loginWithFacebook}
             />
-            < Map currentLat = { this.state.currentLat } currentLong = { this.state.currentLong } />
           </div>
-        }
+        )}
 
-        {
-          this.state.navigationDisplay &&
-          < DropNavigation
-            userPreferences = { this.userPreferences }
-            createEvent = { this.createEvent }
-            userProfile = { this.userProfile }
-            login = { this.login }
-            signOut = { this.signOut }
-            userInfo = { this.state.userObj }
+        {this.state.headerDisplay && (
+          <div>
+            <Header displayNavigation={this.displayNavigation} />
+            <Map
+              currentLat={this.state.currentLat}
+              currentLong={this.state.currentLong}
+              userEvents={this.state.userEvents}
+            />
+          </div>
+        )}
+
+        {this.state.navigationDisplay && (
+          <DropNavigation
+            userPreferences={this.userPreferences}
+            createEvent={this.createEvent}
+            userProfile={this.userProfile}
+            login={this.login}
+            signOut={this.signOut}
+            userInfo={this.state.userObj}
           />
-        }
+        )}
 
-        {
-          this.state.UserPreferencesDisplay &&
-          < UserPreferences
-            exitLogin = { this.exitLogin }
-            userPreferences={ this.myPreferences }
-            userId = { this.state.userObj.id }
+        {this.state.UserPreferencesDisplay && (
+          <UserPreferences
+            exitLogin={this.exitLogin}
+            userPreferences={this.myPreferences}
+            userId={this.state.userObj.id}
           />
-        }
+        )}
 
-        {
-          this.state.createEventDisplay &&
-          < CreateEvent
-            exitLogin = { this.exitLogin }
-          />
-        }
+        {this.state.createEventDisplay && <CreateEvent exitLogin={this.exitLogin} />}
 
-        {
-          this.state.userProfileDisplay &&
-          < UserProfile
-            exitLogin = { this.exitLogin }
-            userInfo = { this.state.userObj }
-          />
-        }
-
+        {this.state.userProfileDisplay && (
+          <UserProfile exitLogin={this.exitLogin} userInfo={this.state.userObj} />
+        )}
       </div>
     );
   }
 }
-
 
 export default App;
