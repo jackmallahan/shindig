@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { compose, withProps } from 'recompose';
 import { withScriptjs, withGoogleMap, GoogleMap, Marker } from 'react-google-maps';
+import DisplayPref from '../DisplayPref/DisplayPref';
 
 const MyMapComponent = compose(
   withProps({
@@ -55,6 +56,9 @@ class Map extends Component {
   };
 
   render() {
+
+    const { userPreferences } = this.props;
+
     console.log(this.state);
     return (
       <div className='backdrop'>
@@ -67,6 +71,9 @@ class Map extends Component {
             markerArray={this.state.markerArray}
           />
         </div>
+        < DisplayPref
+          userPreferences={this.userPreferences}
+        />
       </div>
     );
   }
