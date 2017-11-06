@@ -94,13 +94,13 @@ app.post('/api/v1/users', (request, response) => {
 app.post('/api/v1/joint_tables', (request, response) => {
   const newPreference = request.body;
 
-  for (let userPreferences of [ 'categoryId', 'userId' ]) {
+  for (let userPreferences of [ 'categoryId', 'userId', 'prefName' ]) {
     if (!newPreference[userPreferences]) {
       return response.status(422).send('Missing parameters')
     }
   }
 
-  database('joint_tables').insert({ categoryId: newPreference.categoryId, userId: newPreference.userId }, '*')
+  database('joint_tables').insert({ name: newPreference.prefName, categoryId: newPreference.categoryId, userId: newPreference.userId }, '*')
     .then(preference => response.status(201).json(preference))
     .catch(error => response.status(500).json({ error }))
 });

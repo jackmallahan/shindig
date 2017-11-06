@@ -3,7 +3,7 @@ exports.up = function(knex, Promise) {
     knex.schema.createTable('categories', function(table) {
       table.increments('id').primary();
       table.string('event_id');
-      table.string('name');
+      table.string('name').unique();
       table.string('resource_uri');
 
       table.timestamps(true, true);
@@ -22,6 +22,7 @@ exports.up = function(knex, Promise) {
     knex.schema.createTable('joint_tables', function(table) {
       table.increments('id').primary();
       table.integer('categoryId').unsigned().references('id').inTable('categories');
+      table.string('name').references('name').inTable('categories');
       table.string('userId').references('authID').inTable('users');
 
       table.timestamps(true, true);
