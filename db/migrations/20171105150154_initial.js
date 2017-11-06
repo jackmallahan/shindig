@@ -22,7 +22,7 @@ exports.up = function(knex, Promise) {
     knex.schema.createTable('joint_tables', function(table) {
       table.increments('id').primary();
       table.integer('categoryId').unsigned().references('id').inTable('categories');
-      table.integer('userId').unsigned().references('id').inTable('users');
+      table.string('userId').references('authID').inTable('users');
 
       table.timestamps(true, true);
     }),

@@ -62,10 +62,9 @@ class App extends Component {
         categoryId: categoryid,
       },
     );
-
     fetch('/api/v1/joint_tables', {
       method: 'POST',
-      body: JSON.stringify({ userPreferences }),
+      body: JSON.stringify({ userId: uid, categoryId: categoryid }),
       headers: {
         'Content-Type': 'application/json',
       },
@@ -78,8 +77,6 @@ class App extends Component {
   };
 
   myPreferences = (uid, preferencesId) => {
-    // const uid = this.state.userObj.id
-
     preferencesId.forEach(id => {
       console.log(uid, id);
     });
@@ -91,7 +88,6 @@ class App extends Component {
 
     // this.storePreferences(id, this.postPreferences.forEach(prefId => { return prefId }))
     //ISSUES -- this needs to live on the 'Update Preferences button, NOT on log-in', however, we need to grab the user ID on log-in
-
     googleSignIn().then(user => {
       const { id, displayName, uid, photoURL, email } = user.user;
 
