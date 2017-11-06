@@ -46,6 +46,36 @@ app.get('/api/v1/categories', (request, response) => {
     .catch(error => response.status(500).json({ error }));
 });
 
+app.get('/api/v1/joint_tables', (request, response) => {
+  database('joint_tables')
+    .select()
+    .then((preferences) => {
+      if (!preferences.length) {
+        return response.status(404).json({ error: 'Preferences not found.' });
+      }
+      return preferences;
+    })
+    .then(preferences => response.status(200).json(preferences))
+    .catch(error => response.status(500).json({ error }));
+});
+
+app.get('/api/v1/joint_tables/:userId', (request, response) => {
+  const { userId } = request.params;
+
+  database('joint_tables').where({ userId }).select()
+
+    .then(userId => {
+      if (!userId.length) {
+        return response.status(404).json({ error: 'No user with that Id found' })
+      }
+      response.status(200).json(userId)
+    })
+
+    .catch(error => {
+      response.status(500).json({ error })
+    })
+});
+
 app.post('/api/v1/users', (request, response) => {
   const users = request.body.user;
 

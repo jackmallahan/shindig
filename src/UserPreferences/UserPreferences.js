@@ -8,6 +8,14 @@ class UserPreferences extends Component {
     this.preferences = []
   }
 
+  //Retrieve specific user preferences from joint_tables DB to display whenever this component renders, if that user exists
+  fetchUserData = (userId) => {
+    fetch('/api/v1/joint_tables/userId')
+      .then(response => response.json())
+      .then(response => { return response })
+  }
+  //Need to do something with this retrieval above
+
   selectedEvents = () => {
     this.preferences = []
     const events = document.querySelectorAll('.checkbox')
@@ -19,6 +27,8 @@ class UserPreferences extends Component {
     })
 
     this.props.userPreferences(this.props.userId, this.preferences);
+
+    this.fetchUserData(this.props.userId)
 
     this.props.exitLogin()
   }
