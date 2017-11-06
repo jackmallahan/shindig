@@ -23,6 +23,7 @@ class App extends Component {
       createEventDisplay: false,
       userProfileDisplay: false,
       userObj: {},
+      userPrefs: [],
       currentLat: null,
       currentLong: null,
       userEvents: [],
