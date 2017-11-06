@@ -215,7 +215,7 @@ class App extends Component {
               currentLat={this.state.currentLat}
               currentLong={this.state.currentLong}
               userEvents={this.state.userEvents}
-              userPreferences={this.userPreferences}
+              userAuthId={this.state.userObj.id}
             />
           </div>
         )}
