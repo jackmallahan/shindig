@@ -60,7 +60,6 @@ class Map extends Component {
 
   render() {
     const { userPreferences, currentLat, currentLong } = this.props;
-
     console.log(this.state);
     return (
       <div className="backdrop">
@@ -73,7 +72,10 @@ class Map extends Component {
             markerArray={this.state.markerArray}
           />
         </div>
-        <DisplayPref userPreferences={this.userPreferences} />
+        < DisplayPref
+          userPreferences={this.userPreferences}
+          userAuthId={this.props.userAuthId}
+        />
       </div>
     );
   }
