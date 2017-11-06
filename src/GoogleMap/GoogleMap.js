@@ -56,9 +56,6 @@ class Map extends Component {
   };
 
   render() {
-
-    const { userPreferences } = this.props;
-
     console.log(this.state);
     return (
       <div className='backdrop'>
@@ -73,6 +70,7 @@ class Map extends Component {
         </div>
         < DisplayPref
           userPreferences={this.userPreferences}
+          userAuthId={this.props.userAuthId}
         />
       </div>
     );
