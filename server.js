@@ -64,11 +64,11 @@ app.post('/api/v1/users', (request, response) => {
 app.post('/api/v1/joint_tables', (request, response) => {
   const newPreference = request.body;
 
-  // for (let userPreferences of [ 'categoryId', 'userId' ]) {
-  //   if (!newPreference[userPreferences]) {
-  //     return response.status(422).send({ `Expected parameters: { categoryId: <Integer>, userId: <Integer> }. You're missing a ${ userPreferences }.`})
-  //   }
-  // }
+  for (let userPreferences of [ 'categoryId', 'userId' ]) {
+    if (!newPreference[userPreferences]) {
+      return response.status(422).send('Missing parameters')
+    }
+  }
 
   database('joint_tables').insert({ categoryId: newPreference.categoryId, userId: newPreference.userId }, '*')
     .then(preference => response.status(201).json(preference))
