@@ -51,7 +51,7 @@ app.post('/api/v1/users', (request, response) => {
 
   if (!users.name || !users.authID || !users.photo || !users.email) {
     return response.status(422).send({
-      error: 'Your users is missing a required property.',
+      error: 'Your user is missing a required property.',
     });
   }
 
@@ -64,20 +64,15 @@ app.post('/api/v1/users', (request, response) => {
 app.post('/api/v1/joint_tables', (request, response) => {
   const newPreference = request.body;
 
-  for (const userPreferences of ['categoryId', 'userId']) {
-    if (!newPreference[userPreferences]) {
-      return response
-        .status(422)
-        .send({
-          error: `Expected parameters: { categoryId: <Integer>, userId: <Integer> }. You're missing a ${userPreferences}.`,
-        });
-    }
-  }
+  // for (let userPreferences of [ 'categoryId', 'userId' ]) {
+  //   if (!newPreference[userPreferences]) {
+  //     return response.status(422).send({ `Expected parameters: { categoryId: <Integer>, userId: <Integer> }. You're missing a ${ userPreferences }.`})
+  //   }
+  // }
 
-  database('joint_tables')
-    .insert(newPreference, '*')
+  database('joint_tables').insert({ categoryId: newPreference.categoryId, userId: newPreference.userId }, '*')
     .then(preference => response.status(201).json(preference))
-    .catch(error => response.status(500).json({ error }));
+    .catch(error => response.status(500).json({ error }))
 });
 
 // TO EDIT PREFERENCES - DELETE USER/PREF LINK IN JOINT TABLE WHEN THAT LINK EXISTS IN THE JOINT TABLE AND A USER UNCHECKS THE BOX -- deleting from the table
