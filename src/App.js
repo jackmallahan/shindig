@@ -9,6 +9,7 @@ import UserPreferences from './UserPreferences/UserPreferences.js';
 import CreateEvent from './CreateEvent/CreateEvent.js';
 import UserProfile from './userProfile/UserProfile.js';
 import Map from './GoogleMap/GoogleMap';
+import DisplayPref from './DisplayPref/DisplayPref';
 import './App.css';
 
 class App extends Component {
@@ -214,6 +215,7 @@ class App extends Component {
               currentLat={this.state.currentLat}
               currentLong={this.state.currentLong}
               userEvents={this.state.userEvents}
+              userPreferences={this.userPreferences}
             />
           </div>
         )}

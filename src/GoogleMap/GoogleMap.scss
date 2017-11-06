@@ -10,6 +10,7 @@
   overflow: hidden;
   animation-name: map-drop;
   animation-duration: 1s;
+  z-index: 99;
 }
 
 @keyframes map-drop {
