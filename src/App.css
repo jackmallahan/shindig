@@ -224,7 +224,8 @@
   background-repeat: no-repeat;
   background-size: contain;
   position: absolute;
-  top: -307px; }
+  top: -307px;
+  left: 134px; }
 
 /* The Cube */
 .cube-wrap {
@@ -543,6 +544,15 @@ h1 {
   font-family: 'shindig';
   color: #FF00E6;
   animation: flicker3 6s linear infinite; }
+
+.user-title {
+  left: 68px; }
+
+.pref-title {
+  left: 42px; }
+
+.create-title {
+  left: 70px; }
 
 .preferences-container {
   margin-bottom: 10px; }

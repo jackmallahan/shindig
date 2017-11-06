@@ -15,7 +15,7 @@ class UserProfile extends Component {
     return (
       <div className='outer-drop-container'>
         <div className='drop-login-container'>
-          <p className='drop-in-title'>User Profile</p>
+          <p className='drop-in-title user-title'>User Profile</p>
           <div className='avatar-container'>
             <img className='user-avatar' src={ userInfo.avatar }/>
           </div>

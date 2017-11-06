@@ -40,7 +40,7 @@ class UserPreferences extends Component {
   return (
     <div className='outer-drop-container'>
       <div className='drop-login-container'>
-        <p className='drop-in-title'>User Preferences</p>
+        <p className='drop-in-title pref-title'>User Preferences</p>
         <div className='preferences-container'>
           <ul className='prefernces-list'>
 
