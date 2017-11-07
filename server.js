@@ -105,7 +105,7 @@ app.post('/api/v1/joint_tables', (request, response) => {
     .catch(error => response.status(500).json({ error }))
 });
 
-app.delete('/api/v1/joint_tables/:id', (request, response) => {
+app.delete('/api/v1/joint_tables/:userId&&:categoryId', (request, response) => {
   const { id } = request.params;
 
   database('joint_tables').where({ id }).del()
