@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import { compose, withProps } from 'recompose';
-import { withScriptjs, withGoogleMap, GoogleMap, Marker } from 'react-google-maps';
+import { withScriptjs, withGoogleMap, GoogleMap, Marker, InfoWindow } from 'react-google-maps';
 import DisplayPref from '../DisplayPref/DisplayPref';
+import EventInfo from './EventInfo';
+import apiKey from '../apikey';
 
 const MyMapComponent = compose(
   withProps({
-    googleMapURL:
-      'https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places',
+    googleMapURL: `https://maps.googleapis.com/maps/api/js?key=${apiKey}&v=3.exp&libraries=geometry,drawing,places`,
     loadingElement: <div style={{ height: `100%` }} />,
     containerElement: <div className="map" />,
     mapElement: <div style={{ height: `100%` }} />,
@@ -15,15 +16,44 @@ const MyMapComponent = compose(
   withGoogleMap,
 )(props => {
   return (
-    <GoogleMap defaultZoom={14} defaultCenter={{ lat: props.currentLat, lng: props.currentLong }}>
+    <GoogleMap defaultZoom={13} defaultCenter={{ lat: props.currentLat, lng: props.currentLong }}>
       {props.isMarkerShown &&
         props.markerArray.map((marker, i) => {
           console.log(marker);
+          let isFree;
+          if (marker.isFree) {
+            isFree = 'Free';
+          }
+          let markerObj = {
+            lat: JSON.parse(marker.lat),
+            long: JSON.parse(marker.long),
+            name: marker.name.text,
+            description: marker.description.text,
+            dispay: false,
+          };
+          let styleObj = { display: 'none' };
           return (
             <Marker
               key={i}
-              position={{ lat: JSON.parse(marker.lat), lng: JSON.parse(marker.long) }}
-            />
+              position={{ lat: markerObj.lat, lng: markerObj.long }}
+              onClick={() => {
+                if (styleObj === { display: 'block' }) {
+                  styleObj = { display: 'none' };
+                } else {
+                  styleObj = { display: 'block' };
+                }
+              }}
+            >
+              {
+                <InfoWindow style={styleObj}>
+                  <div>
+                    <h5 className="marker-name">{markerObj.name}</h5>
+                    <p className="marker-description">{markerObj.description}</p>
+                    <h5 className="is-free">{isFree}</h5>
+                  </div>
+                </InfoWindow>
+              }
+            </Marker>
           );
         })}
     </GoogleMap>
@@ -47,7 +77,14 @@ class Map extends Component {
           this.setState({
             markerArray: [
               ...this.state.markerArray,
-              { lat: venue.latitude, long: venue.longitude },
+              {
+                description: event.description,
+                name: event.name,
+                isFree: event.is_free,
+                lat: venue.latitude,
+                long: venue.longitude,
+                display: false,
+              },
             ],
           }),
         );
@@ -61,6 +98,17 @@ class Map extends Component {
     }, 3000);
   };
 
+  toggleInfoWindow = markerObj => {
+    console.log('clicked markerObj', markerObj);
+    if (markerObj.display === false) {
+      markerObj.display = true;
+      this.setState({ isMarkerShown: true });
+    } else {
+      markerObj.display = false;
+      this.setState({ isMarkerShown: true });
+    }
+  };
+
   render() {
     const { userPreferences, currentLat, currentLong } = this.props;
     console.log(this.state);
@@ -71,14 +119,12 @@ class Map extends Component {
             currentLat={currentLat}
             currentLong={currentLong}
             isMarkerShown={this.state.isMarkerShown}
-            onMarkerClick={this.handleMarkerClick}
             markerArray={this.state.markerArray}
+            markerClick={this.markerClick}
+            toggleInfoWindow={this.toggleInfoWindow}
           />
         </div>
-        < DisplayPref
-          userPreferences={this.userPreferences}
-          userAuthId={this.props.userAuthId}
-        />
+        <DisplayPref userPreferences={this.userPreferences} userAuthId={this.props.userAuthId} />
       </div>
     );
   }

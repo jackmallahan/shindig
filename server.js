@@ -105,18 +105,19 @@ app.post('/api/v1/joint_tables', (request, response) => {
     .catch(error => response.status(500).json({ error }))
 });
 
-app.delete('/api/v1/joint_tables/:userId&&:categoryId', (request, response) => {
-  const { id } = request.params;
 
-  database('joint_tables').where({ id }).del()
+// DELETE a preference from the joint table
+app.delete('/api/v1/joint_tables/:uid/:categoryId', (request, response) => {
+  const { uid, categoryId } = request.params;
+
+
+  database('joint_tables').where( 'userId', uid ).andWhere( 'categoryId', categoryId ).delete()
     .then(response => {
       if(!response) {
-        response.status(404).json({ error: 'User preference matching id not found' })
-      }
-      response.sendStatus(204)
+        return response.status(404).json({ error: 'User preference matching id not found' })
+      } response.sendStatus(204)
     })
     .catch(error => response.status(500).json({ error }) )
 });
-//Delete that preference from the joint_tables when checkbox is checked and you uncheck it
 
 module.exports = app;
