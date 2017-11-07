@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { compose, withProps } from 'recompose';
-import { withScriptjs, withGoogleMap, GoogleMap, Marker } from 'react-google-maps';
+import { withScriptjs, withGoogleMap, GoogleMap, Marker, InfoWindow } from 'react-google-maps';
 import DisplayPref from '../DisplayPref/DisplayPref';
+import EventInfo from './EventInfo';
 
 const MyMapComponent = compose(
   withProps({
@@ -23,7 +24,11 @@ const MyMapComponent = compose(
             <Marker
               key={i}
               position={{ lat: JSON.parse(marker.lat), lng: JSON.parse(marker.long) }}
-            />
+            >
+              <InfoWindow onCloseClick={() => this.handleMarkerClick(marker)}>
+                <div>{marker.infoContent}</div>
+              </InfoWindow>
+            </Marker>
           );
         })}
     </GoogleMap>
@@ -55,6 +60,10 @@ class Map extends Component {
     this.delayedShowMarker();
   }
 
+  handleMarkerClick(targetMarker) {
+    this.props.toggleInfoWindow(targetMarker);
+  }
+
   delayedShowMarker = () => {
     setTimeout(() => {
       this.setState({ isMarkerShown: true });
@@ -75,10 +84,7 @@ class Map extends Component {
             markerArray={this.state.markerArray}
           />
         </div>
-        < DisplayPref
-          userPreferences={this.userPreferences}
-          userAuthId={this.props.userAuthId}
-        />
+        <DisplayPref userPreferences={this.userPreferences} userAuthId={this.props.userAuthId} />
       </div>
     );
   }
