@@ -8,25 +8,6 @@ class UserPreferences extends Component {
     this.preferences = []
   }
 
-  fetchUserData = (userId) => {
-    fetch(`/api/v1/joint_tables/${userId}`)
-      .then(response => response.json())
-      .then(response => { return response })
-      // .then(response => showUserPreferences(response))
-  }
-
-  // showUserPreferences = (response) => {
-  //   PLACE.append(`
-  //     <article>
-  //       <ul>
-  //         <li>${response.}</li>
-  //       </ul>
-  //     </article>
-  //   `)
-  // }
-
-  //FN to check user and then if they exist, skip render userpref component, instead fetch preferences and append those preferences to the page
-
   selectedEvents = () => {
     this.preferences = []
     const events = document.querySelectorAll('.checkbox')
