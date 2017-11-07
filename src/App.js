@@ -71,6 +71,18 @@ class App extends Component {
       .catch(error => console.log({ error }));
   };
 
+  deletePreferences = (uid, categoryid) => {
+    fetch(`/api/v1/joint_tables/${uid}/${categoryid}`, {
+    method: 'DELETE',
+  })
+    .then(response => response.json())
+    .then()
+    .then(response => {
+      return response;
+    })
+    .catch(error => console.log({ error }));
+  };
+
   loginWithGoogle = () => {
     googleSignIn().then(user => {
       const { id, displayName, uid, photoURL, email } = user.user;
@@ -240,6 +252,7 @@ class App extends Component {
           <UserPreferences
             exitLogin={this.exitLogin}
             storePreferences={this.storePreferences}
+            deletePreferences ={this.deletePreferences}
             userId={this.state.userObj.id}
           />
         )}

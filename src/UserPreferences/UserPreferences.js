@@ -8,36 +8,52 @@ class UserPreferences extends Component {
     this.preferences = []
   }
 
-  selectedEvents = () => {
-    this.preferences = []
-    const events = document.querySelectorAll('.checkbox')
-    events.forEach((event) => {
-      if(event.checked === true) {
-        let eventName = event.name
-        let eventId = parseInt(event.value)
-        this.preferences.push({eventId: eventId, eventName: eventName})
-      }
-    })
+  // selectedEvents = () => {
+  //   this.preferences = []
+  //   const events = document.querySelectorAll('.checkbox')
+  //   events.forEach((event) => {
+  //     if(event.checked === true) {
+  //       let eventName = event.name
+  //       let eventId = parseInt(event.value)
+  //       this.preferences.push({eventId: eventId, eventName: eventName})
+  //     }
+  //   })
+  //
+  //   this.preferences.forEach(preference => {
+  //     this.props.storePreferences(this.props.userId, preference.eventId, preference.eventName)
+  //   })
+  //
+  //   // this.fetchUserData(this.props.userId)
+  //
+  //   this.props.exitLogin()
+  // }
 
-    this.preferences.forEach(preference => {
-      this.props.storePreferences(this.props.userId, preference.eventId, preference.eventName)
-    })
+// save and delete preferences based on checkbox change
+  checkBox = (e) => {
+    console.log( 'checkbox', this.props.userId, e.target.checked, e.target.name);
+    console.log('value', e.target.value);
+    console.log('parsed', parseInt(e.target.value));
 
-    // this.fetchUserData(this.props.userId)
-
-    this.props.exitLogin()
+    if(e.target.checked === true )  {
+      console.log('true fire');
+      this.props.storePreferences(this.props.userId, e.target.value, e.target.name)
+    }
+    else if(e.target.checked === false ) {
+      console.log('false fire');
+      this.props.deletePreferences(this.props.userId, e.target.value)
+    }
   }
 
-
   render() {
-      const { exitLogin } = this.props;
+
+    const { exitLogin, userId } = this.props;
 
   return (
     <div className='outer-drop-container'>
       <div className='drop-login-container'>
         <p className='drop-in-title pref-title'>User Preferences</p>
         <div className='preferences-container'>
-          <ul className='prefernces-list'>
+          <ul className='prefernces-list' onChange={ (e) => this.checkBox(e)}>
 
             <li className='checkbox-container'>
               <input type='checkbox' id='checkbox1' className='checkbox' name='Music' value='3'/>
@@ -146,8 +162,7 @@ class UserPreferences extends Component {
 
           </ul>
         </div>
-        <button className='nav-btn' onClick={() => this.selectedEvents() }>Update Preferences</button>
-        <button className='nav-btn' onClick={ exitLogin }>Exit</button>
+        <button className='nav-btn' onClick={ exitLogin }>DONE</button>
       </div>
     </div>
   );
@@ -155,3 +170,5 @@ class UserPreferences extends Component {
 }
 
 export default UserPreferences;
+
+// <button className='nav-btn' onClick={() => this.selectedEvents() }>Update Preferences</button>
