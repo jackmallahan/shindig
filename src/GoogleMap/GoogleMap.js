@@ -20,7 +20,10 @@ const MyMapComponent = compose(
         props.markerArray.map((marker, i) => {
           console.log(marker);
           return (
-            <Marker key={i} position={{ lat: JSON.parse(marker.lat), lng: JSON.parse(marker.long) }} />
+            <Marker
+              key={i}
+              position={{ lat: JSON.parse(marker.lat), lng: JSON.parse(marker.long) }}
+            />
           );
         })}
     </GoogleMap>
