@@ -105,6 +105,18 @@ app.post('/api/v1/joint_tables', (request, response) => {
     .catch(error => response.status(500).json({ error }))
 });
 
-// TO EDIT PREFERENCES - DELETE USER/PREF LINK IN JOINT TABLE WHEN THAT LINK EXISTS IN THE JOINT TABLE AND A USER UNCHECKS THE BOX -- deleting from the table
+app.delete('/api/v1/joint_tables/:id', (request, response) => {
+  const { id } = request.params;
+
+  database('joint_tables').where({ id }).del()
+    .then(response => {
+      if(!response) {
+        response.status(404).json({ error: 'User preference matching id not found' })
+      }
+      response.sendStatus(204)
+    })
+    .catch(error => response.status(500).json({ error }) )
+});
+//Delete that preference from the joint_tables when checkbox is checked and you uncheck it
 
 module.exports = app;
