@@ -180,19 +180,24 @@ class App extends Component {
 
   fetchEvents = (locationWithin, lat, long) => {
     fetch(
-      `https://www.eventbriteapi.com/v3/events/search/?sort_by=distance&location.within=${locationWithin}&location.latitude=${lat}&location.longitude=-${long}&start_date.keyword=today&token=FSMFIMMKBZMU5HR6LYN2`,
+      `https://www.eventbriteapi.com/v3/events/search/?sort_by=distance&location.within=${locationWithin}&location.latitude=${lat}&location.longitude=${long}&start_date.keyword=today&token=FSMFIMMKBZMU5HR6LYN2`,
     )
       .then(data => data.json())
       .then(data => this.setState({ userEvents: data.events }));
   };
 
   componentDidMount() {
-    this.fetchEvents('1mi', 39.7508, 104.9966);
     this.getLocation();
+    if (this.state.currentLat) {
+      this.fetchEvents('1mi', this.state.currentLat, this.state.currentLong);
+    } else {
+      setTimeout(() => {
+        this.fetchEvents('1mi', this.state.currentLat, this.state.currentLong);
+      }, 7000);
+    }
   }
 
   render() {
-
     return (
       <div className="App">
         <Background exitLogin={this.exitLogin} />
