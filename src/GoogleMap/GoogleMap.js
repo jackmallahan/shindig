@@ -17,9 +17,12 @@ const MyMapComponent = compose(
   return (
     <GoogleMap defaultZoom={14} defaultCenter={{ lat: props.currentLat, lng: props.currentLong }}>
       {props.isMarkerShown &&
-        props.markerArray.forEach(marker => (
-          <Marker position={{ lat: marker.lat, lng: marker.long }} onClick={props.onMarkerClick} />
-        ))}
+        props.markerArray.map((marker, i) => {
+          console.log(marker);
+          return (
+            <Marker key={i} position={{ lat: JSON.parse(marker.lat), lng: JSON.parse(marker.long) }} />
+          );
+        })}
     </GoogleMap>
   );
 });
@@ -56,13 +59,14 @@ class Map extends Component {
   };
 
   render() {
+    const { userPreferences, currentLat, currentLong } = this.props;
     console.log(this.state);
     return (
-      <div className='backdrop'>
+      <div className="backdrop">
         <div className="map-container">
           <MyMapComponent
-            currentLat={this.props.currentLat}
-            currentLong={this.props.currentLong}
+            currentLat={currentLat}
+            currentLong={currentLong}
             isMarkerShown={this.state.isMarkerShown}
             onMarkerClick={this.handleMarkerClick}
             markerArray={this.state.markerArray}
