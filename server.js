@@ -65,6 +65,7 @@ app.get('/api/v1/joint_tables/:userId', (request, response) => {
   database('joint_tables')
     .where({ userId })
     .select()
+    /* eslint-disable no-alert, no-console */
     .then(userId => {
       if (!userId.length) {
         return response.status(404).json({ error: 'No user with that Id found' });
@@ -81,7 +82,7 @@ app.post('/api/v1/users', (request, response) => {
 
   if (!users.name || !users.authID || !users.photo || !users.email) {
     return response.status(422).send({
-      error: 'Your user is missing a required property.'
+      error: 'Your user is missing a required property.',
     });
   }
 
@@ -93,8 +94,10 @@ app.post('/api/v1/users', (request, response) => {
 
 app.post('/api/v1/joint_tables', (request, response) => {
   const newPreference = request.body;
+  /* eslint-disable no-alert, prefer-const */
 
-  for (let userPreferences of ['categoryId', 'userId', 'prefName', 'categoryNumber']) {
+  for (const userPreferences of ['categoryId', 'userId', 'prefName', 'categoryNumber']) {
+    /* eslint-enable no-alert, prefer-const */
     if (!newPreference[userPreferences]) {
       return response.status(422).send('Missing parameters');
     }
@@ -106,9 +109,9 @@ app.post('/api/v1/joint_tables', (request, response) => {
         name: newPreference.prefName,
         categoryId: newPreference.categoryId,
         userId: newPreference.userId,
-        categoryNumber: newPreference.categoryNumber
+        categoryNumber: newPreference.categoryNumber,
       },
-      '*'
+      '*',
     )
     .then(preference => response.status(201).json(preference))
     .catch(error => response.status(500).json({ error }));
