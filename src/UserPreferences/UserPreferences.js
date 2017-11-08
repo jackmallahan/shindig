@@ -7,8 +7,6 @@ class UserPreferences extends Component {
     };
   }
 
-
-// auto check the checkboxes based on user preferences
   fetchUserData = (userId) => {
     fetch(`/api/v1/joint_tables/${userId}`)
       .then(response => response.json())
