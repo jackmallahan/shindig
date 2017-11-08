@@ -80,69 +80,57 @@ describe('API', () => {
     });
   });
 
-  // describe('GET /api/v1/joint_tables', () => {
-  //   it('should retrieve join table information', (done) => {
-  //     chai.request(server)
-  //       .get('/api/v1/joint_tables')
-  //       .end((error, response) => {
-  //         response.should.have.status(200);
-  //         response.should.be.json;
-  //         response.body.forEach(category => {
-  //           category.should.have.property('id');
-  //           category.should.have.property('categoryId');
-  //           category.should.have.property('name');
-  //           category.should.have.property('userId');
-  //         });
-  //         done();
-  //       });
-  //   });
-  // });
-  //
-  // describe('GET /api/v1/joint_tables/:userId', () => {
-  //   it('should retrieve specific user information from join table', (done) => {
-  //     chai.request(server)
-  //       .get('/api/v1/joint_tables/8iP08uvsOrTtZV3CPsUAzsJYFoZ2')
-  //       .end((error, response) => {
-  //         response.should.have.status(200);
-  //         response.should.be.json;
-  //         response.body.forEach(category => {
-  //           category.should.have.property('id');
-  //           category.should.have.property('categoryId');
-  //           category.should.have.property('name');
-  //           category.should.have.property('userId');
-  //         });
-  //         done();
-  //       });
-  //   });
-  // });
+  describe('GET /api/v1/joint_tables', () => {
+    it('should return a page with join table data', (done) => {
+      chai.request(server)
+        .get('/api/v1/joint_tables')
+        .end((error, response) => {
+          response.should.have.status(200);
+        });
+        done();
+    });
+  });
 
   // describe('POST /api/v1/users', () => {
   //   it('should POST a new user', (done) => {
   //       chai.request(server)
   //         .post('/api/v1/users')
   //         .send({
-  //           name: ,
+  //           name: 'Travis',
+  //           email: 'travisalwaysrollins@gmail.com',
+  //           authID: 'TravisIs2Kool',
+  //           photo: 'http://www.dope.com/coolestdude.png'
   //         })
   //         .end((error, response) => {
   //           response.should.have.status(201);
   //           response.should.be.json;
   //           response.body[0].should.have.property('id');
   //           response.body[0].should.have.property('name');
-  //
-  //           chai.request(server)
-  //             .get('/api/v1/users')
-  //             .end((error, response) => {
-  //               response.should.have.status(200);
-  //               response.should.be.json;
-  //               // response.body.length.should.equal(0);
-  //               done();
-  //             });
+  //           response.body[0].should.have.property('email');
+  //           response.body[0].should.have.property('authID');
+  //           response.body[0].should.have.property('photo');
+  //           done();
   //         });
-  //   });
+  //       });
   // });
 
   // describe('POST /api/v1/joint_tables', () => {
   //   it('should POST user preferences', (done) => {
+  //   });
+  // });
+
+  // describe('DELETE /api/v1/joint_tables/:uid/:categoryId', () => {
+  //   it('should delete a user with preferences', (done) => {
+  //     chai.request(server)
+  //     .delete('/api/v1/joint_tables/202323904893483921489102/3')
+  //     .end((error, response) => {
+  //       chai.request(server)
+  //       .get('/api/v1/joint_tables')
+  //       .end( (error, response) => {
+  //       response.should.have.status(200);
+  //       done();
+  //       });
+  //     });
   //   });
   // });
 
