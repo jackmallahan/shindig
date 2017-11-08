@@ -1,11 +1,11 @@
-.map-container  {
+.map-container {
   width: 300px;
   height: 400px;
   position: relative;
   top: 100px;
   margin: auto;
   border-radius: 10px;
-  border:3px solid #1086e8;
+  border: 3px solid #1086e8;
   box-shadow: 0px 0px 36px 2px #1086e8;
   overflow: hidden;
   animation-name: map-drop;
@@ -14,13 +14,65 @@
 }
 
 @keyframes map-drop {
-	0% { top: -500px; }
-	100% { top: 100px; }
+  0% {
+    top: -500px;
+  }
+  100% {
+    top: 100px;
+  }
 }
 
-.map  {
+.map {
   width: 300px;
   height: 400px;
   position: absolute;
   z-index: 1;
+}
+
+.events-info-container {
+  margin: auto;
+  width: 300px;
+  height: 250px;
+  position: relative;
+  top: 110px;
+  left: 0px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: black;
+  overflow: scroll;
+  border-radius: 10px;
+  border: 3px solid #1086e8;
+  box-shadow: 0px 0px 36px 2px #1086e8;
+}
+
+.events-info {
+  width: 280px;
+  background: black;
+  padding-left: 9px;
+  padding-top: 10px;
+}
+
+.event-number {
+  font-size: 30px;
+  font-family: 'goodTimes';
+  color: #1086e8;
+}
+
+.marker-name {
+  font-size: 15px;
+  font-family: 'goodTimes';
+  color: #ff00e6;
+}
+
+.marker-description {
+  font-size: 12px;
+  font-family: 'goodTimes';
+  color: #1086e8;
+}
+
+.is-free {
+  font-size: 12px;
+  font-family: 'goodTimes';
+  color: #1086e8;
 }
