@@ -109,7 +109,6 @@ class Map extends Component {
             toggleInfoWindow={this.toggleInfoWindow}
           />
         </div>
-        <DisplayPref userPreferences={this.userPreferences} userAuthId={this.props.userAuthId} />
       </div>
     );
   }
