@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { compose, withProps } from 'recompose';
+import { compose, withProps, withStateHandlers } from 'recompose';
 import { withScriptjs, withGoogleMap, GoogleMap, Marker, InfoWindow } from 'react-google-maps';
 import DisplayPref from '../DisplayPref/DisplayPref';
-import EventInfo from './EventInfo';
+// import EventInfo from './EventInfo';
 import apiKey from '../apikey';
 
 const MyMapComponent = compose(
@@ -12,6 +12,16 @@ const MyMapComponent = compose(
     containerElement: <div className="map" />,
     mapElement: <div style={{ height: `100%` }} />,
   }),
+  withStateHandlers(
+    () => ({
+      isOpen: false,
+    }),
+    {
+      onToggleOpen: ({ isOpen }) => () => ({
+        isOpen: !isOpen,
+      }),
+    },
+  ),
   withScriptjs,
   withGoogleMap,
 )(props => {
@@ -31,28 +41,21 @@ const MyMapComponent = compose(
             description: marker.description.text,
             dispay: false,
           };
-          let styleObj = { display: 'none' };
           return (
             <Marker
               key={i}
               position={{ lat: markerObj.lat, lng: markerObj.long }}
-              onClick={() => {
-                if (styleObj === { display: 'block' }) {
-                  styleObj = { display: 'none' };
-                } else {
-                  styleObj = { display: 'block' };
-                }
-              }}
+              onClick={props.onToggleOpen}
             >
-              {
-                <InfoWindow style={styleObj}>
+              {props.isOpen && (
+                <InfoWindow onCloseClick={props.onToggleOpen}>
                   <div>
                     <h5 className="marker-name">{markerObj.name}</h5>
                     <p className="marker-description">{markerObj.description}</p>
                     <h5 className="is-free">{isFree}</h5>
                   </div>
                 </InfoWindow>
-              }
+              )}
             </Marker>
           );
         })}
