@@ -55,10 +55,10 @@ class App extends Component {
       .catch(error => console.log({ error }));
   };
 
-  storePreferences = (uid, categoryid, name) => {
+  storePreferences = (uid, categoryid, name, categoryNumber) => {
     fetch('/api/v1/joint_tables', {
       method: 'POST',
-      body: JSON.stringify({ userId: uid, categoryId: categoryid, prefName: name }),
+      body: JSON.stringify({ userId: uid, categoryId: categoryid, prefName: name, categoryNumber: categoryNumber }),
       headers: {
         'Content-Type': 'application/json',
       },
