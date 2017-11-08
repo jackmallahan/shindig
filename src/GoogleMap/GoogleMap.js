@@ -8,10 +8,10 @@ const MyMapComponent = compose(
     googleMapURL: `https://maps.googleapis.com/maps/api/js?key=${apiKey}&v=3.exp&libraries=geometry,drawing,places`,
     loadingElement: <div style={{ height: `100%` }} />,
     containerElement: <div className="map" />,
-    mapElement: <div style={{ height: `100%` }} />,
+    mapElement: <div style={{ height: `100%` }} />
   }),
   withScriptjs,
-  withGoogleMap,
+  withGoogleMap
 )(props => {
   return (
     <div>
@@ -37,7 +37,7 @@ class Map extends Component {
     this.state = {
       isMarkerShown: false,
       markerArray: [],
-      filteredEvents: [],
+      filteredEvents: []
     };
   }
 
@@ -56,17 +56,15 @@ class Map extends Component {
                 lat: venue.latitude,
                 long: venue.longitude,
                 display: false,
-                categoryId: event.category_id,
-              },
-            ],
-          }),
+                categoryId: event.category_id
+              }
+            ]
+          })
         )
         .then(() =>
           this.setState({
-            filteredEvents: this.state.markerArray.filter(marker =>
-              this.props.userPrefs.includes(marker.categoryId),
-            ),
-          }),
+            filteredEvents: this.state.markerArray.filter(marker => this.props.userPrefs.includes(marker.categoryId))
+          })
         );
       this.delayedShowMarker();
     });
@@ -87,7 +85,6 @@ class Map extends Component {
             console.log(marker);
             return userPrefs.includes(marker.categoryId);
           });
-    console.log(this.state.filteredEvents);
     return (
       <div>
         <div className="map-container">
@@ -101,7 +98,7 @@ class Map extends Component {
           />
         </div>
         <div className="events-info-container">
-          {this.state.markerArray.map((marker, i) => {
+          {this.state.filteredEvents.map((marker, i) => {
             return (
               <div className="events-info" key={i}>
                 <h3 className="event-number">{`${i + 1}`}</h3>
