@@ -1,5 +1,5 @@
 module.exports = {
-  "extends": ["airbnb", "prettier"],
+  "extends": ["airbnb"],
   "globals": {
     "fetch": "false",
     "localStorage": "false",
