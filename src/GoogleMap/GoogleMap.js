@@ -16,16 +16,25 @@ const MyMapComponent = compose(
   return (
     <div>
       <GoogleMap defaultZoom={13} defaultCenter={{ lat: props.currentLat, lng: props.currentLong }}>
-        {props.isMarkerShown &&
-          props.markerArray.map((marker, i) => {
-            return (
-              <Marker
-                key={i}
-                label={`${i + 1}`}
-                position={{ lat: JSON.parse(marker.lat), lng: JSON.parse(marker.long) }}
-              />
-            );
-          })}
+        {props.userAuthId
+          ? props.filteredEvents.map((marker, i) => {
+              return (
+                <Marker
+                  key={i}
+                  label={`${i + 1}`}
+                  position={{ lat: JSON.parse(marker.lat), lng: JSON.parse(marker.long) }}
+                />
+              );
+            })
+          : props.markerArray.map((marker, i) => {
+              return (
+                <Marker
+                  key={i}
+                  label={`${i + 1}`}
+                  position={{ lat: JSON.parse(marker.lat), lng: JSON.parse(marker.long) }}
+                />
+              );
+            })}
       </GoogleMap>
     </div>
   );
@@ -56,7 +65,8 @@ class Map extends Component {
                 lat: venue.latitude,
                 long: venue.longitude,
                 display: false,
-                categoryId: event.category_id
+                categoryId: event.category_id,
+                venueId: event.venue_id
               }
             ]
           })
@@ -77,14 +87,7 @@ class Map extends Component {
   };
 
   render() {
-    const { userPrefs, currentLat, currentLong } = this.props;
-    const filteredEvents =
-      this.state.markerArray === []
-        ? []
-        : this.state.markerArray.forEach(marker => {
-            console.log(marker);
-            return userPrefs.includes(marker.categoryId);
-          });
+    const { userPrefs, currentLat, currentLong, userAuthId } = this.props;
     return (
       <div>
         <div className="map-container">
@@ -95,6 +98,8 @@ class Map extends Component {
             markerArray={this.state.markerArray}
             markerClick={this.markerClick}
             toggleInfoWindow={this.toggleInfoWindow}
+            filteredEvents={this.state.filteredEvents}
+            userAuthId={userAuthId}
           />
         </div>
         <div className="events-info-container">
