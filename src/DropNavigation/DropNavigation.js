@@ -1,4 +1,5 @@
 import React from 'react';
+/* eslint-disable no-warning, arrow-body-style */
 
 const DropNavigation = ({ userPreferences, createEvent, userProfile, signOut, login, userInfo }) => {
 

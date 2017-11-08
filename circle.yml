@@ -10,7 +10,6 @@ test:
   pre:
     - eslint server.js
     - eslint src/Background/Background.js
-    - eslint src/cube/cube.js
     - eslint src/DropNavigation/DropNavigation.js
     - eslint src/header/header.js
     - eslint src/header/header.js
