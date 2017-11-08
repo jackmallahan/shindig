@@ -1,6 +1,6 @@
 import React from 'react';
 /* eslint-disable no-warning, jsx-a11y/no-static-element-interactions */
-/* eslint-disable no-warning, jsx-a11y/no-static-element-interactions */
+/* eslint-disable no-warning, react/self-closing-comp */
 
 const Header = ({ displayNavigation }) => (
   <div className="header-outer-container">
