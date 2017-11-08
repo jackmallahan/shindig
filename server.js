@@ -65,7 +65,6 @@ app.get('/api/v1/joint_tables/:userId', (request, response) => {
   database('joint_tables')
     .where({ userId })
     .select()
-    /* eslint-disable no-alert, consistent-return */
     .then(userId => {
       if (!userId.length) {
         return response.status(404).json({ error: 'No user with that Id found' });
@@ -94,10 +93,8 @@ app.post('/api/v1/users', (request, response) => {
 
 app.post('/api/v1/joint_tables', (request, response) => {
   const newPreference = request.body;
-  /* eslint-disable no-alert, prefer-const */
 
   for (const userPreferences of ['categoryId', 'userId', 'prefName', 'categoryNumber']) {
-    /* eslint-enable no-alert, prefer-const */
     if (!newPreference[userPreferences]) {
       return response.status(422).send('Missing parameters');
     }
