@@ -65,7 +65,7 @@ app.get('/api/v1/joint_tables/:userId', (request, response) => {
   database('joint_tables')
     .where({ userId })
     .select()
-    /* eslint-disable no-alert, no-console */
+    /* eslint-disable no-alert, consistent-return */
     .then(userId => {
       if (!userId.length) {
         return response.status(404).json({ error: 'No user with that Id found' });
