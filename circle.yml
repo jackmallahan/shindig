@@ -13,7 +13,6 @@ test:
     - eslint src/DropNavigation/DropNavigation.js
     - eslint src/header/header.js
     - eslint src/header/header.js
-    - eslint src/LoginNavigation/LoginNavigation.js
     - eslint src/UserProfile/UserProfile.js
     - eslint test/routes.spec.js
 
