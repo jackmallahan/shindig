@@ -5,41 +5,39 @@ class UserPreferences extends Component {
     super(props);
     this.state = {
     };
-    this.preferences = []
   }
 
-  // selectedEvents = () => {
-  //   this.preferences = []
-  //   const events = document.querySelectorAll('.checkbox')
-  //   events.forEach((event) => {
-  //     if(event.checked === true) {
-  //       let eventName = event.name
-  //       let eventId = parseInt(event.value)
-  //       this.preferences.push({eventId: eventId, eventName: eventName})
-  //     }
-  //   })
-  //
-  //   this.preferences.forEach(preference => {
-  //     this.props.storePreferences(this.props.userId, preference.eventId, preference.eventName)
-  //   })
-  //
-  //   // this.fetchUserData(this.props.userId)
-  //
-  //   this.props.exitLogin()
-  // }
+
+// auto check the checkboxes based on user preferences
+  fetchUserData = (userId) => {
+    fetch(`/api/v1/joint_tables/${userId}`)
+      .then(response => response.json())
+      .then(response => { return response })
+      .then(response => this.checkPreferences(response))
+  }
+
+  checkPreferences = (preferences) => {
+    const events = document.querySelectorAll('.checkbox')
+    preferences.forEach((pref) => {
+      let prefId = pref.categoryId
+      events.forEach((event) => {
+        if(parseInt(event.value) === prefId) {
+          event.checked = true
+        }
+      })
+    })
+  }
+
+  componentDidMount() {
+    this.fetchUserData(this.props.userId)
+  }
 
 // save and delete preferences based on checkbox change
   checkBox = (e) => {
-    console.log( 'checkbox', this.props.userId, e.target.checked, e.target.name);
-    console.log('value', e.target.value);
-    console.log('parsed', parseInt(e.target.value));
-
     if(e.target.checked === true )  {
-      console.log('true fire');
       this.props.storePreferences(this.props.userId, e.target.value, e.target.name)
     }
     else if(e.target.checked === false ) {
-      console.log('false fire');
       this.props.deletePreferences(this.props.userId, e.target.value)
     }
   }
