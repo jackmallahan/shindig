@@ -42,9 +42,15 @@ class UserPreferences extends Component {
     }
   }
 
+
+  updatePref = () =>  {
+    this.props.exitLogin();
+    this.props.updatePrefArray(this.props.userId);
+  }
+
   render() {
 
-    const { exitLogin, userId } = this.props;
+    const { exitLogin, userId, updatePrefArray } = this.props;
 
   return (
     <div className='outer-drop-container'>
@@ -160,7 +166,7 @@ class UserPreferences extends Component {
 
           </ul>
         </div>
-        <button className='nav-btn' onClick={ exitLogin }>DONE</button>
+        <button className='nav-btn' onClick={ this.updatePref }>DONE</button>
       </div>
     </div>
   );
