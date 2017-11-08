@@ -109,7 +109,7 @@ app.post('/api/v1/joint_tables', (request, response) => {
         userId: newPreference.userId,
         categoryNumber: newPreference.categoryNumber,
       },
-      '*',
+      '*'
     )
     .then(preference => response.status(201).json(preference))
     .catch(error => response.status(500).json({ error }));
