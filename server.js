@@ -20,7 +20,7 @@ app.listen(app.get('port'), () => {
 });
 
 // Endpoints
-// eslint-disable no-alert, consistent-return
+/* eslint-disable no-alert, consistent-return */
 app.get('/api/v1/users', (request, response) => {
   database('users')
     .select()
