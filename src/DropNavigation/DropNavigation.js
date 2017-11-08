@@ -1,6 +1,6 @@
 import React from 'react';
 
-const DropNavigation = ( { userPreferences, createEvent, userProfile, signOut, login, userInfo }) => {
+const DropNavigation = ({ userPreferences, createEvent, userProfile, signOut, login, userInfo }) => {
 
   return (
     <div className='outer-drop-nav-container'>
