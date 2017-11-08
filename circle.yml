@@ -10,18 +10,13 @@ test:
   pre:
     - eslint server.js
     - eslint src/Background/Background.js
-    - eslint src/CreateEvent/CreateEvent.js
     - eslint src/cube/cube.js
     - eslint src/DropNavigation/DropNavigation.js
-    - eslint src/GoogleMap/GoogleMap.js
     - eslint src/header/header.js
     - eslint src/header/header.js
     - eslint src/LoginNavigation/LoginNavigation.js
-    - eslint src/UserPreferences/UserPreferences.js
     - eslint src/UserProfile/UserProfile.js
-    - eslint src/App.js
     - eslint test/routes.spec.js
-    - eslint knexfile.js
 
 deployment:
   production:
