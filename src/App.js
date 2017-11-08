@@ -75,7 +75,6 @@ class App extends Component {
       method: 'DELETE'
     })
       .then(response => response.json())
-      .then()
       .then(response => {
         return response;
       })
@@ -122,7 +121,8 @@ class App extends Component {
       .then(response => {
         return response;
       })
-      .then(response => this.logEvents(response));
+      .then(response => this.logEvents(response))
+      .catch(error => console.log(error));
   };
 
   logEvents = userInfo => {
@@ -143,7 +143,7 @@ class App extends Component {
   };
 
   displayNavigation = () => {
-    if (this.state.navigationDisplay === false) {
+    if (!this.state.navigationDisplay) {
       this.setState({
         navigationDisplay: true
       });

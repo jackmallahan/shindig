@@ -21,16 +21,28 @@ exports.up = function(knex, Promise) {
 
     knex.schema.createTable('joint_tables', function(table) {
       table.increments('id').primary();
-      table.integer('categoryId').unsigned().references('id').inTable('categories');
-      table.string('categoryNumber').references('event_id').inTable('categories');
-      table.string('name').references('name').inTable('categories');
-      table.string('userId').references('authID').inTable('users');
+      table
+        .integer('categoryId')
+        .unsigned()
+        .references('id')
+        .inTable('categories');
+      table
+        .string('categoryNumber')
+        .references('event_id')
+        .inTable('categories');
+      table
+        .string('name')
+        .references('name')
+        .inTable('categories');
+      table
+        .string('userId')
+        .references('authID')
+        .inTable('users');
 
       table.timestamps(true, true);
-    }),
-  ])
+    })
+  ]);
 };
-
 
 exports.down = function(knex, Promise) {
   return Promise.all([
