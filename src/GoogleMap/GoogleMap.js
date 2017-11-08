@@ -46,8 +46,7 @@ class Map extends Component {
     this.state = {
       isMarkerShown: false,
       markerArray: [],
-      filteredEvents: [],
-      noDuplicates: []
+      filteredEvents: []
     };
   }
 
@@ -72,24 +71,6 @@ class Map extends Component {
             ]
           })
         )
-        .then(() => {
-          const getNoDuplicates = arr => {
-            let hashTable = {};
-            let noDuplicates = [];
-            let j = 0;
-            for (let i = 0; i < arr.length; i++) {
-              let venueId = arr[i].venueId;
-              if (hashTable[venueId] !== 1) {
-                hashTable[venueId] = 1;
-                noDuplicates[j++] = venueId;
-              }
-            }
-            return noDuplicates.sort();
-          };
-          this.setState({
-            noDuplicates: getNoDuplicates(this.state.markerArray)
-          });
-        })
         .then(() =>
           this.setState({
             filteredEvents: this.state.markerArray.filter(marker => this.props.userPrefs.includes(marker.categoryId))
@@ -106,7 +87,7 @@ class Map extends Component {
   };
 
   render() {
-    const { userPrefs, currentLat, currentLong, userAuthId } = this.props;
+    const { userPrefs, currentLat, currentLong, userAuthId, userEvents } = this.props;
     return (
       <div>
         <div className="map-container">
@@ -122,16 +103,27 @@ class Map extends Component {
           />
         </div>
         <div className="events-info-container">
-          {this.state.filteredEvents.map((marker, i) => {
-            return (
-              <div className="events-info" key={i}>
-                <h3 className="event-number">{`${i + 1}`}</h3>
-                <h5 className="marker-name">{marker.name.text}</h5>
-                <p className="marker-description">{marker.description.text}</p>
-                <h5 className="is-free">{marker.isFree ? 'Free' : null}</h5>
-              </div>
-            );
-          })}
+          {userAuthId
+            ? this.state.filteredEvents.map((marker, i) => {
+                return (
+                  <div className="events-info" key={i}>
+                    <h3 className="event-number">{`${i + 1}`}</h3>
+                    <h5 className="marker-name">{marker.name.text}</h5>
+                    <p className="marker-description">{marker.description.text}</p>
+                    <h5 className="is-free">{marker.isFree ? 'Free' : null}</h5>
+                  </div>
+                );
+              })
+            : userEvents.map((marker, i) => {
+                return (
+                  <div className="events-info" key={i}>
+                    <h3 className="event-number">{`${i + 1}`}</h3>
+                    <h5 className="marker-name">{marker.name.text}</h5>
+                    <p className="marker-description">{marker.description.text}</p>
+                    <h5 className="is-free">{marker.isFree ? 'Free' : null}</h5>
+                  </div>
+                );
+              })}
         </div>
       </div>
     );
