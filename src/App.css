@@ -435,7 +435,7 @@ h1 {
 
 .background {
   width: 100%;
-  height: 100vh;
+  height: 820px;
   background-image: url("./assets/backdrop.jpg");
   background-position: center;
   background-repeat: no-repeat;
@@ -673,3 +673,45 @@ input:checked ~ label {
   height: 400px;
   position: absolute;
   z-index: 1; }
+
+.events-info-container {
+  margin: auto;
+  width: 300px;
+  height: 250px;
+  position: relative;
+  top: 110px;
+  left: 0px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: black;
+  overflow: scroll;
+  border-radius: 10px;
+  border: 3px solid #1086e8;
+  box-shadow: 0px 0px 36px 2px #1086e8; }
+
+.events-info {
+  width: 280px;
+  background: black;
+  padding-left: 9px;
+  padding-top: 10px; }
+
+.event-number {
+  font-size: 30px;
+  font-family: 'goodTimes';
+  color: #1086e8; }
+
+.marker-name {
+  font-size: 15px;
+  font-family: 'goodTimes';
+  color: #ff00e6; }
+
+.marker-description {
+  font-size: 12px;
+  font-family: 'goodTimes';
+  color: #1086e8; }
+
+.is-free {
+  font-size: 12px;
+  font-family: 'goodTimes';
+  color: #1086e8; }

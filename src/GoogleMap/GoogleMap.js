@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { compose, withProps } from 'recompose';
 import { withScriptjs, withGoogleMap, GoogleMap, Marker, InfoWindow } from 'react-google-maps';
-import DisplayPref from '../DisplayPref/DisplayPref';
 import apiKey from '../apikey';
 
 const MyMapComponent = compose(
@@ -28,19 +27,6 @@ const MyMapComponent = compose(
             );
           })}
       </GoogleMap>
-      <div className="events-info">
-        {props.markerArray.map((marker, i) => {
-          const isFree = 'Free';
-          return (
-            <div>
-              <h3 className="event-number">{`${i + 1}`}</h3>
-              <h5 className="marker-name">{marker.name.text}</h5>
-              <p className="marker-description">{marker.description.text}</p>
-              <h5 className="is-free">{marker.isFree ? 'Free' : null}</h5>
-            </div>
-          );
-        })}
-      </div>
     </div>
   );
 });
@@ -51,6 +37,7 @@ class Map extends Component {
     this.state = {
       isMarkerShown: false,
       markerArray: [],
+      filteredEvents: [],
     };
   }
 
@@ -69,6 +56,7 @@ class Map extends Component {
                 lat: venue.latitude,
                 long: venue.longitude,
                 display: false,
+                categoryId: event.category_id,
               },
             ],
           }),
@@ -83,22 +71,14 @@ class Map extends Component {
     }, 3000);
   };
 
-  toggleInfoWindow = markerObj => {
-    console.log('clicked markerObj', markerObj);
-    if (markerObj.display === false) {
-      markerObj.display = true;
-      this.setState({ isMarkerShown: true });
-    } else {
-      markerObj.display = false;
-      this.setState({ isMarkerShown: true });
-    }
-  };
-
   render() {
-    const { userPreferences, currentLat, currentLong } = this.props;
-    console.log(this.state);
+    const { userPrefs, currentLat, currentLong } = this.props;
+    // const filteredEvents = this.state.markerArray.filter(marker =>
+    //   userPrefs.includes(marker.categoryId),
+    // );
+    console.log(this.state.filteredEvents);
     return (
-      <div className="backdrop">
+      <div>
         <div className="map-container">
           <MyMapComponent
             currentLat={currentLat}
@@ -108,6 +88,18 @@ class Map extends Component {
             markerClick={this.markerClick}
             toggleInfoWindow={this.toggleInfoWindow}
           />
+        </div>
+        <div className="events-info-container">
+          {this.state.markerArray.map((marker, i) => {
+            return (
+              <div className="events-info" key={i}>
+                <h3 className="event-number">{`${i + 1}`}</h3>
+                <h5 className="marker-name">{marker.name.text}</h5>
+                <p className="marker-description">{marker.description.text}</p>
+                <h5 className="is-free">{marker.isFree ? 'Free' : null}</h5>
+              </div>
+            );
+          })}
         </div>
       </div>
     );
