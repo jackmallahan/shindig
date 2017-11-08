@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { compose, withProps } from 'recompose';
 import { withScriptjs, withGoogleMap, GoogleMap, Marker, InfoWindow } from 'react-google-maps';
-import EventInfo from './EventInfo';
+import DisplayPref from '../DisplayPref/DisplayPref';
 import apiKey from '../apikey';
 
 const MyMapComponent = compose(
@@ -15,47 +15,33 @@ const MyMapComponent = compose(
   withGoogleMap,
 )(props => {
   return (
-    <GoogleMap defaultZoom={13} defaultCenter={{ lat: props.currentLat, lng: props.currentLong }}>
-      {props.isMarkerShown &&
-        props.markerArray.map((marker, i) => {
-          console.log(marker);
-          let isFree;
-          if (marker.isFree) {
-            isFree = 'Free';
-          }
-          let markerObj = {
-            lat: JSON.parse(marker.lat),
-            long: JSON.parse(marker.long),
-            name: marker.name.text,
-            description: marker.description.text,
-            dispay: false,
-          };
-          let styleObj = { display: 'none' };
+    <div>
+      <GoogleMap defaultZoom={13} defaultCenter={{ lat: props.currentLat, lng: props.currentLong }}>
+        {props.isMarkerShown &&
+          props.markerArray.map((marker, i) => {
+            return (
+              <Marker
+                key={i}
+                label={`${i + 1}`}
+                position={{ lat: JSON.parse(marker.lat), lng: JSON.parse(marker.long) }}
+              />
+            );
+          })}
+      </GoogleMap>
+      <div className="events-info">
+        {props.markerArray.map((marker, i) => {
+          const isFree = 'Free';
           return (
-            <Marker
-              key={i}
-              position={{ lat: markerObj.lat, lng: markerObj.long }}
-              onClick={() => {
-                if (styleObj === { display: 'block' }) {
-                  styleObj = { display: 'none' };
-                } else {
-                  styleObj = { display: 'block' };
-                }
-              }}
-            >
-              {
-                <InfoWindow style={styleObj}>
-                  <div>
-                    <h5 className="marker-name">{markerObj.name}</h5>
-                    <p className="marker-description">{markerObj.description}</p>
-                    <h5 className="is-free">{isFree}</h5>
-                  </div>
-                </InfoWindow>
-              }
-            </Marker>
+            <div>
+              <h3 className="event-number">{`${i + 1}`}</h3>
+              <h5 className="marker-name">{marker.name.text}</h5>
+              <p className="marker-description">{marker.description.text}</p>
+              <h5 className="is-free">{marker.isFree ? 'Free' : null}</h5>
+            </div>
           );
         })}
-    </GoogleMap>
+      </div>
+    </div>
   );
 });
 
