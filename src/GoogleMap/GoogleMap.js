@@ -46,7 +46,8 @@ class Map extends Component {
     this.state = {
       isMarkerShown: false,
       markerArray: [],
-      filteredEvents: []
+      filteredEvents: [],
+      noDuplicates: []
     };
   }
 
@@ -71,6 +72,24 @@ class Map extends Component {
             ]
           })
         )
+        .then(() => {
+          const getNoDuplicates = arr => {
+            let hashTable = {};
+            let noDuplicates = [];
+            let j = 0;
+            for (let i = 0; i < arr.length; i++) {
+              let venueId = arr[i].venueId;
+              if (hashTable[venueId] !== 1) {
+                hashTable[venueId] = 1;
+                noDuplicates[j++] = venueId;
+              }
+            }
+            return noDuplicates.sort();
+          };
+          this.setState({
+            noDuplicates: getNoDuplicates(this.state.markerArray)
+          });
+        })
         .then(() =>
           this.setState({
             filteredEvents: this.state.markerArray.filter(marker => this.props.userPrefs.includes(marker.categoryId))
