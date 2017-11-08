@@ -26,7 +26,7 @@ class App extends Component {
       userPrefs: [],
       currentLat: null,
       currentLong: null,
-      userEvents: [],
+      userEvents: []
     };
   }
 
@@ -37,16 +37,16 @@ class App extends Component {
         name: displayName,
         authID: uid,
         photo: photoURL,
-        email: email,
-      },
+        email: email
+      }
     );
 
     fetch('/api/v1/users', {
       method: 'POST',
       body: JSON.stringify({ user }),
       headers: {
-        'Content-Type': 'application/json',
-      },
+        'Content-Type': 'application/json'
+      }
     })
       .then(response => response.json())
       .then(response => {
@@ -60,8 +60,8 @@ class App extends Component {
       method: 'POST',
       body: JSON.stringify({ userId: uid, categoryId: categoryid, prefName: name, categoryNumber: categoryNumber }),
       headers: {
-        'Content-Type': 'application/json',
-      },
+        'Content-Type': 'application/json'
+      }
     })
       .then(response => response.json())
       .then(response => {
@@ -72,7 +72,7 @@ class App extends Component {
 
   deletePreferences = (uid, categoryid) => {
     fetch(`/api/v1/joint_tables/${uid}/${categoryid}`, {
-      method: 'DELETE',
+      method: 'DELETE'
     })
       .then(response => response.json())
       .then()
@@ -94,7 +94,7 @@ class App extends Component {
         userObj: { name: displayName, id: uid, avatar: photoURL, email: email },
         loginPageDisplay: false,
         headerDisplay: true,
-        UserPreferencesDisplay: true,
+        UserPreferencesDisplay: true
       });
     });
   };
@@ -111,7 +111,7 @@ class App extends Component {
         userObj: { name: displayName, id: uid, avatar: photoURL, email: email },
         loginPageDisplay: false,
         headerDisplay: true,
-        UserPreferencesDisplay: true,
+        UserPreferencesDisplay: true
       });
     });
   };
@@ -128,47 +128,47 @@ class App extends Component {
   logEvents = userInfo => {
     let prefList = [];
     userInfo.forEach(user => {
-      prefList.push(user.categoryId);
+      prefList.push(user.categoryNumber);
     });
     this.setState({
-      userPrefs: prefList,
+      userPrefs: prefList
     });
   };
 
   skipLogin = () => {
     this.setState({
       loginPageDisplay: false,
-      headerDisplay: true,
+      headerDisplay: true
     });
   };
 
   displayNavigation = () => {
     if (this.state.navigationDisplay === false) {
       this.setState({
-        navigationDisplay: true,
+        navigationDisplay: true
       });
     } else {
       this.setState({
-        navigationDisplay: false,
+        navigationDisplay: false
       });
     }
   };
 
   userPreferences = () => {
     this.setState({
-      UserPreferencesDisplay: true,
+      UserPreferencesDisplay: true
     });
   };
 
   createEvent = () => {
     this.setState({
-      createEventDisplay: true,
+      createEventDisplay: true
     });
   };
 
   userProfile = () => {
     this.setState({
-      userProfileDisplay: true,
+      userProfileDisplay: true
     });
   };
 
@@ -177,7 +177,7 @@ class App extends Component {
       navigationDisplay: false,
       UserPreferencesDisplay: false,
       createEventDisplay: false,
-      userProfileDisplay: false,
+      userProfileDisplay: false
     });
   };
 
@@ -189,7 +189,7 @@ class App extends Component {
       EmailLoginDisplay: false,
       UserPreferencesDisplay: false,
       createEventDisplay: false,
-      userProfileDisplay: false,
+      userProfileDisplay: false
     });
   };
 
@@ -198,7 +198,7 @@ class App extends Component {
     this.setState({
       userObj: {},
       loginPageDisplay: true,
-      headerDisplay: false,
+      headerDisplay: false
     });
     this.exitLogin();
   };
@@ -207,14 +207,14 @@ class App extends Component {
     navigator.geolocation.getCurrentPosition(position => {
       this.setState({
         currentLat: position.coords.latitude,
-        currentLong: position.coords.longitude,
+        currentLong: position.coords.longitude
       });
     });
   };
 
   fetchEvents = (locationWithin, lat, long) => {
     fetch(
-      `https://www.eventbriteapi.com/v3/events/search/?sort_by=distance&location.within=${locationWithin}&location.latitude=${lat}&location.longitude=${long}&start_date.keyword=today&token=FSMFIMMKBZMU5HR6LYN2`,
+      `https://www.eventbriteapi.com/v3/events/search/?sort_by=distance&location.within=${locationWithin}&location.latitude=${lat}&location.longitude=${long}&start_date.keyword=today&token=FSMFIMMKBZMU5HR6LYN2`
     )
       .then(data => data.json())
       .then(data => this.setState({ userEvents: data.events }));
@@ -283,9 +283,7 @@ class App extends Component {
 
         {this.state.createEventDisplay && <CreateEvent exitLogin={this.exitLogin} />}
 
-        {this.state.userProfileDisplay && (
-          <UserProfile exitLogin={this.exitLogin} userInfo={this.state.userObj} />
-        )}
+        {this.state.userProfileDisplay && <UserProfile exitLogin={this.exitLogin} userInfo={this.state.userObj} />}
       </div>
     );
   }
