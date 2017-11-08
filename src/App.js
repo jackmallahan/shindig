@@ -9,7 +9,6 @@ import UserPreferences from './UserPreferences/UserPreferences.js';
 import CreateEvent from './CreateEvent/CreateEvent.js';
 import UserProfile from './userProfile/UserProfile.js';
 import Map from './GoogleMap/GoogleMap';
-import DisplayPref from './DisplayPref/DisplayPref';
 import './App.css';
 
 class App extends Component {
@@ -89,6 +88,8 @@ class App extends Component {
 
       this.storeUser(displayName, uid, photoURL, email);
 
+      this.fetchUserData(uid)
+
       this.setState({
         userObj: { name: displayName, id: uid, avatar: photoURL, email: email },
         loginPageDisplay: false,
@@ -104,6 +105,8 @@ class App extends Component {
 
       this.storeUser(displayName, uid, photoURL, email);
 
+      this.fetchUserData(uid)
+
       this.setState({
         userObj: { name: displayName, id: uid, avatar: photoURL, email: email },
         loginPageDisplay: false,
@@ -112,6 +115,23 @@ class App extends Component {
       });
     });
   };
+
+  fetchUserData = (userId) => {
+    fetch(`/api/v1/joint_tables/${userId}`)
+      .then(response => response.json())
+      .then(response => { return response })
+      .then(response => this.logEvents(response))
+  }
+
+  logEvents = (userInfo) => {
+    let prefList = []
+    userInfo.forEach((user) => {
+      prefList.push(user.categoryId)
+    })
+    this.setState({
+      userPrefs: prefList
+    });
+  }
 
   skipLogin = () => {
     this.setState({
@@ -254,6 +274,7 @@ class App extends Component {
             storePreferences={this.storePreferences}
             deletePreferences ={this.deletePreferences}
             userId={this.state.userObj.id}
+            updatePrefArray={this.fetchUserData}
           />
         )}
 

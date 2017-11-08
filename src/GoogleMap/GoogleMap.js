@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { compose, withProps } from 'recompose';
 import { withScriptjs, withGoogleMap, GoogleMap, Marker, InfoWindow } from 'react-google-maps';
-import DisplayPref from '../DisplayPref/DisplayPref';
 import EventInfo from './EventInfo';
 import apiKey from '../apikey';
 
@@ -124,7 +123,6 @@ class Map extends Component {
             toggleInfoWindow={this.toggleInfoWindow}
           />
         </div>
-        <DisplayPref userPreferences={this.userPreferences} userAuthId={this.props.userAuthId} />
       </div>
     );
   }
