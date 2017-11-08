@@ -15,6 +15,7 @@ test:
     - eslint src/header/header.js
     - eslint src/UserProfile/UserProfile.js
     - eslint test/routes.spec.js
+    - eslint src/App.js
 
 deployment:
   production:

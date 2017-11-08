@@ -1,5 +1,7 @@
 import React from 'react';
-
+/* eslint-disable no-alert, react/jsx-indent */
+/* eslint-disable no-alert, react/self-closing-comp */
+/* eslint-disable no-alert,  react/jsx-closing-tag-location */
 
 const Cube = () => {
 
