@@ -1,6 +1,6 @@
 # Shindig
 
-Are you ever looking to kill some time and think, "I wonder whats going on around me"? Enter Shindig. An application that displays all events around your current location based on your personal preferences.
+Are you ever looking to kill some time and think, "I wonder whats going on around me?" Enter Shindig. An application that displays all events around your current location based on your personal preferences.
 
 This project was built as the Mod 4 Capstone for the Front End Engineering program at The Turing School of Software and Design
 
