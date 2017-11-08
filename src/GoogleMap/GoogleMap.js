@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { compose, withProps } from 'recompose';
 import { withScriptjs, withGoogleMap, GoogleMap, Marker, InfoWindow } from 'react-google-maps';
-import apiKey from '../apikey';
+import apiKey from '../apiKey';
 
 const MyMapComponent = compose(
   withProps({
