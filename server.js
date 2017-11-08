@@ -105,9 +105,11 @@ app.post('/api/v1/joint_tables', (request, response) => {
     .catch(error => response.status(500).json({ error }))
 });
 
+
 // DELETE a preference from the joint table
 app.delete('/api/v1/joint_tables/:uid/:categoryId', (request, response) => {
   const { uid, categoryId } = request.params;
+
 
   database('joint_tables').where( 'userId', uid ).andWhere( 'categoryId', categoryId ).delete()
     .then(response => {
