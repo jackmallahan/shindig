@@ -17,12 +17,12 @@ class UserProfile extends Component {
         <div className='drop-login-container'>
           <p className='drop-in-title user-title'>User Profile</p>
           <div className='avatar-container'>
-            <img className='user-avatar' src={ userInfo.avatar }/>
+            <img className='user-avatar' src={userInfo.avatar} alt='user-avatar' />
           </div>
-          <p className='user-name'>{ userInfo.name ? (`User: ${userInfo.name} `) : 'No User Logged In' }</p>
-          <p className='user-name'>{ userInfo.email ? (`Email: ${userInfo.email} `) : 'No email' }</p>
+          <p className='user-name'>{userInfo.name ? (`User: ${userInfo.name} `) : 'No User Logged In'}</p>
+          <p className='user-name'>{userInfo.email ? (`Email: ${userInfo.email} `) : 'No email'}</p>
 
-          <button className='nav-btn' onClick={ exitLogin }>Exit</button>
+          <button className='nav-btn' onClick={exitLogin}>Exit</button>
 
         </div>
       </div>

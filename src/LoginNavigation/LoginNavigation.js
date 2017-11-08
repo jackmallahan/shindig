@@ -1,7 +1,8 @@
 import React from 'react';
 
-const LoginNavigation = ( { skipLogin, emailLogin, loginWithGoogle, loginWithFacebook } ) => {
-    return (
+
+const LoginNavigation = ({ skipLogin, emailLogin, loginWithGoogle, loginWithFacebook }) =>
+    (
       <div className='backdrop'>
         <div className='outer-button-container'>
           <div className='inner-button-container'>
@@ -13,6 +14,6 @@ const LoginNavigation = ( { skipLogin, emailLogin, loginWithGoogle, loginWithFac
         <p className='copyright'>Copyright © 2017 1705 Development, Inc.</p>
       </div>
     );
-  }
+
 
 export default LoginNavigation;
