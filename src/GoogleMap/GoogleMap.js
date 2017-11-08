@@ -60,9 +60,16 @@ class Map extends Component {
               },
             ],
           }),
+        )
+        .then(() =>
+          this.setState({
+            filteredEvents: this.state.markerArray.filter(marker =>
+              this.props.userPrefs.includes(marker.categoryId),
+            ),
+          }),
         );
+      this.delayedShowMarker();
     });
-    this.delayedShowMarker();
   }
 
   delayedShowMarker = () => {
@@ -73,9 +80,13 @@ class Map extends Component {
 
   render() {
     const { userPrefs, currentLat, currentLong } = this.props;
-    // const filteredEvents = this.state.markerArray.filter(marker =>
-    //   userPrefs.includes(marker.categoryId),
-    // );
+    const filteredEvents =
+      this.state.markerArray === []
+        ? []
+        : this.state.markerArray.forEach(marker => {
+            console.log(marker);
+            return userPrefs.includes(marker.categoryId);
+          });
     console.log(this.state.filteredEvents);
     return (
       <div>
