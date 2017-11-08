@@ -8,9 +8,9 @@ const Header = ({ displayNavigation }) => (
           S<span className="flicker2">hi</span>nd<span className="flicker1">i</span>g
       </h1>
       <div className="menu-icon">
-        <div className="menu-bar">
-        <div className="menu-bar">
-        <div className="menu-bar">
+        <div className="menu-bar"></div>
+        <div className="menu-bar"></div>
+        <div className="menu-bar"></div>
       </div>
     </div>
   </div>
